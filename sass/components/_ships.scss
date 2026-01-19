@@ -1,0 +1,54 @@
+@use "../utils/" as u;
+@use "../globals/" as g;
+
+.ship__a,
+.ship__b,
+.ship__c,
+.ship__s,
+.ship__d {
+  position: absolute;
+  background-color: #2e2e2e;
+  z-index: 10;
+  border-radius: 20px;
+  padding: 8px 10px 8px 10px;
+
+  &--inner-ship {
+    background-color: #959695;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+  }
+
+  &--horizontal {
+    left: 0;
+  }
+
+  &--vertical {
+    top: 0;
+    left: 50%;
+    transform: translateX(0%) rotate(90deg);
+    transform-origin: top left;
+    margin-left: 16px;
+  }
+}
+
+.ship__a {
+  width: 260px;
+  height: 34px;
+}
+.ship__b {
+  width: 190px;
+  height: 34px;
+}
+.ship__c {
+  width: 146px;
+  height: 34px;
+}
+.ship__s {
+  width: 148px;
+  height: 34px;
+}
+.ship__d {
+  width: 94px;
+  height: 34px;
+}

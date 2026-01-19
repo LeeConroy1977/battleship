@@ -1,0 +1,29 @@
+@use "../utils/" as u;
+@use "../globals/" as g;
+
+.intercom {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 120px;
+
+  border-radius: u.rem(12);
+
+  &__image-container {
+    width: 20%;
+    height: 100%;
+    background-color: rgb(203, 208, 212);
+    border-top-left-radius: u.rem(12);
+    border-bottom-left-radius: u.rem(12);
+    box-shadow: g.$inner-shadow;
+  }
+
+  &__message-container {
+    width: 80%;
+    height: 100%;
+    background-color: rgb(25, 25, 26);
+    border-top-right-radius: u.rem(12);
+    border-bottom-right-radius: u.rem(12);
+    box-shadow: g.$inner-shadow;
+  }
+}
