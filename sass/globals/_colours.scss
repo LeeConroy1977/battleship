@@ -1,0 +1,24 @@
+$bg: hsl(150, 15%, 13%);
+$text-colour: hsl(0, 0%, 100%);
+$silver: linear-gradient(
+  180deg,
+  #c8c8c8 0%,
+  #b3b3b3 10%,
+  #dedede 22%,
+  #9c9c9c 36%,
+  #c2c2c2 50%,
+  #8a8a8a 65%,
+  #b0b0b0 80%,
+  #9a9a9a 92%,
+  #cccccc 100%
+);
+
+$inner-shadow:
+  inset 0 1px 0 rgba(255, 255, 255, 0.15),
+  inset 0 0 0 2px rgba(0, 0, 0, 0.65),
+  inset 0 -3px 5px rgba(0, 0, 0, 0.75);
+
+:root {
+  --bg: #{$bg};
+  --text-colour: #{$text-colour};
+}
