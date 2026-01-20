@@ -6,7 +6,7 @@ const userGrid = document.querySelector(".user__grid");
 
 // Grid size varibles
 const gridArraySize = 11;
-const gridArraySizeCss = "nine";
+const gridArraySizeCss = "eleven";
 
 // Grid arrays
 const computerArr = Array.from({ length: gridArraySize }, () =>
@@ -30,6 +30,7 @@ const shipSizes = {
 // populate grid function
 
 const populateUserGrid = () => {
+  userGrid.classList.add(`user__grid--${gridArraySizeCss}`);
   let count = 0;
   for (let i = 0; i < computerArr.length; i++) {
     for (let j = 0; j < computerArr[i].length; j++) {
@@ -48,6 +49,7 @@ const populateUserGrid = () => {
 };
 
 const populateCompGrid = () => {
+  computerGrid.classList.add(`computer__grid--${gridArraySizeCss}`);
   let count = 0;
   for (let i = 0; i < computerArr.length; i++) {
     for (let j = 0; j < computerArr[i].length; j++) {
@@ -64,6 +66,91 @@ const populateCompGrid = () => {
     }
   }
 };
-
 populateUserGrid();
 populateCompGrid();
+
+// Place ships in gridArrays
+
+const randomNumbers = () => {
+  const randomDirection = Math.ceil(Math.random() * 4);
+  const randomRow = Math.floor(Math.random() * gridArraySize);
+  const randomPosition = Math.floor(Math.random() * gridArraySize);
+  return [randomDirection, randomRow, randomPosition];
+};
+
+const checkSpaceAvailable = (arr, direction, row, position, length) => {
+  const gridLength = arr.length;
+  for (let i = 0; i < length; i++) {
+    const r =
+      direction === 1
+        ? row - i
+        : direction === 2 || direction === 4
+          ? row
+          : row + i;
+    const p =
+      direction === 1 || direction === 3
+        ? position
+        : direction === 2
+          ? position + i
+          : position - i;
+    if (r < 0 || r >= gridLength || p < 0 || p >= gridLength) return false;
+    if (arr[r][p] !== "") return false;
+  }
+  return true;
+};
+
+const placeShips = (arr, type, length, display = false) => {
+  const [direction, row, position] = randomNumbers();
+  const gridLength = arr.length;
+  const isSpace = checkSpaceAvailable(arr, direction, row, position, length);
+  let orientation = direction;
+  let startRow = row;
+  let startCol = position;
+  if (!isSpace) {
+    return placeShips(arr, type, length, display);
+  }
+  if (direction === 1) {
+    if (row - (length - 1) < 0) return placeShips(arr, type, length, display);
+    orientation = "vertical";
+    for (let i = 0; i < length; i++) {
+      arr[row - i][position] = type;
+    }
+    startRow = row - (length - 1);
+    startCol = position;
+  } else if (direction === 2) {
+    if (position + (length - 1) >= gridLength)
+      return placeShips(arr, type, length, display);
+    orientation = "horizontal";
+    for (let i = 0; i < length; i++) {
+      arr[row][position + i] = type;
+    }
+    startRow = row;
+    startCol = position;
+  } else if (direction === 3) {
+    if (row + (length - 1) >= gridLength)
+      return placeShips(arr, type, length, display);
+    orientation = "vertical";
+    for (let i = 0; i < length; i++) {
+      arr[row + i][position] = type;
+    }
+    startRow = row;
+    startCol = position;
+  } else if (direction === 4) {
+    if (position - (length - 1) < 0)
+      return placeShips(arr, type, length, display);
+    orientation = "horizontal";
+    for (let i = 0; i < length; i++) {
+      arr[row][position - i] = type;
+    }
+    startRow = row;
+    startCol = position - (length - 1);
+  }
+};
+
+const shipPlacement = () => {
+  Object.entries(shipSizes).forEach(([type, spaces]) => {
+    placeShips(userArr, type, spaces, true);
+    placeShips(computerArr, type, spaces);
+  });
+};
+shipPlacement();
