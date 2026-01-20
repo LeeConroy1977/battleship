@@ -99,6 +99,27 @@ const checkSpaceAvailable = (arr, direction, row, position, length) => {
   return true;
 };
 
+const placeShipsUserDisplay = (
+  shipType,
+  direction,
+  startRow,
+  startCol,
+  gridType,
+) => {
+  const positionNum = startRow * gridArraySize + startCol + 1;
+  document.querySelectorAll(".grid__cell--user").forEach((cell) => {
+    if (Number(cell.dataset.number) === positionNum) {
+      const shipDisplayDiv = document.createElement("div");
+      const innerShip = document.createElement("div");
+      shipDisplayDiv.classList.add(`ship__${shipType}`);
+      shipDisplayDiv.classList.add(`ship__${shipType}--${direction}`);
+      innerShip.classList.add(`ship__${shipType}--inner-ship`);
+      cell.appendChild(shipDisplayDiv);
+      shipDisplayDiv.appendChild(innerShip);
+    }
+  });
+};
+
 const placeShips = (arr, type, length, display = false) => {
   const [direction, row, position] = randomNumbers();
   const gridLength = arr.length;
@@ -145,6 +166,9 @@ const placeShips = (arr, type, length, display = false) => {
     startRow = row;
     startCol = position - (length - 1);
   }
+  if (display) {
+    placeShipsUserDisplay(type, orientation, startRow, startCol);
+  }
 };
 
 const shipPlacement = () => {
@@ -154,3 +178,25 @@ const shipPlacement = () => {
   });
 };
 shipPlacement();
+
+const handleUserSelection = (arr, cell, row, position) => {
+  const contentDiv = cell.querySelector(".cell__content");
+  if (Object.keys(shipSizes).includes(arr[row][position])) {
+    computerArr[row][position] = 1;
+    contentDiv.style.backgroundColor = "red";
+    cell.style.backgroundColor = "green";
+    contentDiv.style.border = "3px solid black";
+  } else {
+    computerArr[row][position] = 0;
+    contentDiv.style.backgroundColor = "white";
+    contentDiv.style.border = "3px solid black";
+    cell.style.backgroundColor = "#444";
+  }
+};
+document.querySelectorAll(".grid__cell--computer").forEach((cell) =>
+  cell.addEventListener("click", () => {
+    const cellRow = cell.dataset.row;
+    const cellPosition = cell.dataset.position;
+    return handleUserSelection(userArr, cell, cellRow, cellPosition);
+  }),
+);
