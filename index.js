@@ -4,15 +4,26 @@ const userGrid = document.querySelector(".user__grid");
 
 //Boolean contorl vaiable
 
+let userWon = false;
+let computerWon = false;
+
 // Grid size varibles
-const gridArraySize = 11;
-const gridArraySizeCss = "eleven";
+const gridArraySize = 9;
+const gridArraySizeCss = "nine";
 
 // Grid arrays
 const computerArr = Array.from({ length: gridArraySize }, () =>
   Array.from({ length: gridArraySize }, () => ""),
 );
 const userArr = Array.from({ length: gridArraySize }, () =>
+  Array.from({ length: gridArraySize }, () => ""),
+);
+
+const computerStrikesGrid = Array.from({ length: gridArraySize }, () =>
+  Array.from({ length: gridArraySize }, () => ""),
+);
+
+const userSrikesGrid = Array.from({ length: gridArraySize }, () =>
   Array.from({ length: gridArraySize }, () => ""),
 );
 
@@ -26,6 +37,8 @@ const shipSizes = {
   s: 3,
   d: 2,
 };
+const computerSunkenShips = [];
+const userSunkenShips = [];
 
 // populate grid function
 
@@ -171,6 +184,7 @@ const placeShips = (arr, type, length, display = false) => {
   }
 };
 
+
 const shipPlacement = () => {
   Object.entries(shipSizes).forEach(([type, spaces]) => {
     placeShips(userArr, type, spaces, true);
@@ -179,24 +193,58 @@ const shipPlacement = () => {
 };
 shipPlacement();
 
-const handleUserSelection = (arr, cell, row, position) => {
+const handleSunkShip = () => {
+  for (const [shipType, hits] of Object.entries(computerShips)) {
+    const required = shipSizes[shipType];
+
+    if (hits.length >= required && !computerSunkenShips.includes(shipType)) {
+      computerSunkenShips.push(shipType);
+
+      const totalShips = Object.keys(shipSizes).length;
+
+      if (computerSunkenShips.length === totalShips) {
+        console.log("USER WON!!! All ships sunk.");
+        userWon = true;
+      } else {
+        alert(`You sank my ${shipType}!`);
+      }
+    }
+  }
+
+  console.log("Current sunken ships:", computerSunkenShips);
+};
+
+const addShipStrikes = (shipObj, type) => {
+  shipObj[type] = [...shipObj[type], 1];
+};
+
+const handleUserSelection = (arr, cell, row, position, shipType) => {
+  if (arr[row][position] === "hit" || arr[row][position] === "miss") return;
   const contentDiv = cell.querySelector(".cell__content");
-  if (Object.keys(shipSizes).includes(arr[row][position])) {
-    computerArr[row][position] = 1;
+  if (Object.keys(shipSizes).includes(shipType)) {
+    arr[row][position] = "hit";
+    addShipStrikes(computerShips, shipType);
     contentDiv.style.backgroundColor = "red";
     cell.style.backgroundColor = "green";
     contentDiv.style.border = "3px solid black";
   } else {
-    computerArr[row][position] = 0;
+    arr[row][position] = "miss";
     contentDiv.style.backgroundColor = "white";
     contentDiv.style.border = "3px solid black";
     cell.style.backgroundColor = "#444";
   }
+  setTimeout(() => {
+    handleSunkShip();
+  }, 2500);
+
+  console.log(userSrikesGrid);
 };
+
 document.querySelectorAll(".grid__cell--computer").forEach((cell) =>
   cell.addEventListener("click", () => {
-    const cellRow = cell.dataset.row;
-    const cellPosition = cell.dataset.position;
-    return handleUserSelection(userArr, cell, cellRow, cellPosition);
+    const row = Number(cell.dataset.row);
+    const position = Number(cell.dataset.position);
+    const shipType = computerArr[row][position];
+    return handleUserSelection(userSrikesGrid, cell, row, position, shipType);
   }),
 );
