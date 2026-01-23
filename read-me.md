@@ -66,10 +66,20 @@ A boolean variable called start game will be set to true and the pop-up will dis
 - An eventListener with a foreach() for the cells will be need when a player clicks the cell. If dataset coordinated of the cell with give the values needed to loop through and check the player array. if an empty string, 0 will be assign to that array position. If there is a boat id, a 1 will be place there to signal a hit. According styles will be added.
 I will need 2 player objects {a: [], b: [], C: [], s: [], d: []}. When there is a hit, I will push the ship id into the relevent object.array and use the length to signal when a ship is sunk. It will also be used to conditionally remove the ship from the ship display above the grid.
 
--- The computers selects a cell
+-- The computers selects a random cell
 
 - To start the computer will just ramdomly select a cell using a function to select a cell.
--- if a cell hits a ship. The computer will store that cell coordinate and on it's next selection will choose an adjacent cell ain any direction if there is space. It will keeping doing this until it gets a second hit. It will then know the axis and only choose the adjacent cells in that direction untill the ship is sunk.
+
+-- Computer becomes intelligent after the first strike of a ship
+
+if a cell hits a ship. The computer will store that cell coordinate and on it's next selection will choose an adjacent cell ain any direction if there is space. It will keeping doing this until it gets a second hit. It will then know the axis and only choose the adjacent cells in that direction untill the ship is sunk.
+
+- This is the most complex part of the game.
+- once a ship is hit, those coordinates will be passed to a targetUserShip(row, position, shipType, direction) function.
+- The direction will be conditionally changed when the function is recursively used.
+- a ramdom helper function will determine the direction of the next strike.
+
+
 
 -- End game
 

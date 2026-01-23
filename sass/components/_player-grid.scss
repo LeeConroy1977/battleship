@@ -50,10 +50,12 @@
 }
 
 .cell__content {
+  position: absolute;
   width: 26px;
   height: 26px;
   border-radius: 50%;
   background-color: #292929;
+  z-index: 70;
 }
 
 .grid__cell {

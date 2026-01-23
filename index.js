@@ -1,17 +1,22 @@
-//Dom variable
 const computerGrid = document.querySelector(".computer__grid");
 const userGrid = document.querySelector(".user__grid");
-
-//Boolean contorl vaiable
-
+let userGo = true;
 let userWon = false;
 let computerWon = false;
-
-// Grid size varibles
+let firstComputerHit = false;
+let targetMode = false;
+let targetOrigin = { row: null, position: null };
+let targetDirection = null;
+let targetShipType = null;
+let computerJustShot = false;
+let computerTurnLocked = false;
+let triedDirections = [];
+let targetAxis = null;
+let adjacentShipsArr = [];
 const gridArraySize = 9;
 const gridArraySizeCss = "nine";
 
-// Grid arrays
+
 const computerArr = Array.from({ length: gridArraySize }, () =>
   Array.from({ length: gridArraySize }, () => ""),
 );
@@ -27,7 +32,6 @@ const userSrikesGrid = Array.from({ length: gridArraySize }, () =>
   Array.from({ length: gridArraySize }, () => ""),
 );
 
-// Ship objects
 const computerShips = { a: [], b: [], c: [], s: [], d: [] };
 const userShips = { a: [], b: [], c: [], s: [], d: [] };
 const shipSizes = {
@@ -39,8 +43,6 @@ const shipSizes = {
 };
 const computerSunkenShips = [];
 const userSunkenShips = [];
-
-// populate grid function
 
 const populateUserGrid = () => {
   userGrid.classList.add(`user__grid--${gridArraySizeCss}`);
@@ -82,8 +84,6 @@ const populateCompGrid = () => {
 populateUserGrid();
 populateCompGrid();
 
-// Place ships in gridArrays
-
 const randomNumbers = () => {
   const randomDirection = Math.ceil(Math.random() * 4);
   const randomRow = Math.floor(Math.random() * gridArraySize);
@@ -116,10 +116,10 @@ const placeShipsUserDisplay = (
   shipType,
   direction,
   startRow,
-  startCol,
+  startPosition,
   gridType,
 ) => {
-  const positionNum = startRow * gridArraySize + startCol + 1;
+  const positionNum = startRow * gridArraySize + startPosition + 1;
   document.querySelectorAll(".grid__cell--user").forEach((cell) => {
     if (Number(cell.dataset.number) === positionNum) {
       const shipDisplayDiv = document.createElement("div");
@@ -139,7 +139,7 @@ const placeShips = (arr, type, length, display = false) => {
   const isSpace = checkSpaceAvailable(arr, direction, row, position, length);
   let orientation = direction;
   let startRow = row;
-  let startCol = position;
+  let startPosition = position;
   if (!isSpace) {
     return placeShips(arr, type, length, display);
   }
@@ -150,7 +150,7 @@ const placeShips = (arr, type, length, display = false) => {
       arr[row - i][position] = type;
     }
     startRow = row - (length - 1);
-    startCol = position;
+    startPosition = position;
   } else if (direction === 2) {
     if (position + (length - 1) >= gridLength)
       return placeShips(arr, type, length, display);
@@ -159,7 +159,7 @@ const placeShips = (arr, type, length, display = false) => {
       arr[row][position + i] = type;
     }
     startRow = row;
-    startCol = position;
+    startPosition = position;
   } else if (direction === 3) {
     if (row + (length - 1) >= gridLength)
       return placeShips(arr, type, length, display);
@@ -168,7 +168,7 @@ const placeShips = (arr, type, length, display = false) => {
       arr[row + i][position] = type;
     }
     startRow = row;
-    startCol = position;
+    startPosition = position;
   } else if (direction === 4) {
     if (position - (length - 1) < 0)
       return placeShips(arr, type, length, display);
@@ -177,13 +177,12 @@ const placeShips = (arr, type, length, display = false) => {
       arr[row][position - i] = type;
     }
     startRow = row;
-    startCol = position - (length - 1);
+    startPosition = position - (length - 1);
   }
   if (display) {
-    placeShipsUserDisplay(type, orientation, startRow, startCol);
+    placeShipsUserDisplay(type, orientation, startRow, startPosition);
   }
 };
-
 
 const shipPlacement = () => {
   Object.entries(shipSizes).forEach(([type, spaces]) => {
@@ -193,7 +192,7 @@ const shipPlacement = () => {
 };
 shipPlacement();
 
-const handleSunkShip = () => {
+const handleUserSunkShip = () => {
   for (const [shipType, hits] of Object.entries(computerShips)) {
     const required = shipSizes[shipType];
 
@@ -203,15 +202,258 @@ const handleSunkShip = () => {
       const totalShips = Object.keys(shipSizes).length;
 
       if (computerSunkenShips.length === totalShips) {
-        console.log("USER WON!!! All ships sunk.");
         userWon = true;
       } else {
         alert(`You sank my ${shipType}!`);
       }
     }
   }
+};
 
-  console.log("Current sunken ships:", computerSunkenShips);
+const handleComputerSunkShip = () => {
+  for (const [shipType, hits] of Object.entries(userShips)) {
+    const required = shipSizes[shipType];
+    if (hits.length >= required && !userSunkenShips.includes(shipType)) {
+      userSunkenShips.push(shipType);
+      const totalShips = Object.keys(shipSizes).length;
+      if (userSunkenShips.length === totalShips) {
+        computerWon = true;
+        return;
+      } else {
+        alert(`Computer sank your ${shipType}!`);
+      }
+    }
+  }
+};
+
+const handleCellHitCss = (arr, cell, row, position) => {
+  const contentDiv = cell.querySelector(".cell__content");
+  arr[row][position] = "hit";
+  contentDiv.style.backgroundColor = "red";
+  cell.style.backgroundColor = "green";
+  contentDiv.style.border = "3px solid black";
+  contentDiv.style.zIndex = 50;
+};
+const handleCellMissCss = (arr, cell, row, position) => {
+  const contentDiv = cell.querySelector(".cell__content");
+  arr[row][position] = "miss";
+  contentDiv.style.backgroundColor = "white";
+  contentDiv.style.border = "3px solid black";
+  cell.style.backgroundColor = "#444";
+};
+
+const getCell = (player, row, position) => {
+  return Array.from(document.querySelectorAll(`.grid__cell--${player}`)).find(
+    (c) =>
+      Number(c.dataset.row) === row && Number(c.dataset.position) === position,
+  );
+};
+
+const randomComputerCoordinates = () => {
+  const row = Math.floor(Math.random() * gridArraySize);
+  const position = Math.floor(Math.random() * gridArraySize);
+
+  return [row, position];
+};
+
+const getAdjacentCell = (row, position, stepRow, stepPosition) => {
+  const newRow = row + stepRow;
+  const newposition = position + stepPosition;
+  if (
+    newRow < 0 ||
+    newRow >= gridArraySize ||
+    newposition < 0 ||
+    newposition >= gridArraySize
+  ) {
+    return null;
+  }
+  return { row: newRow, position: newposition };
+};
+
+const resetTargetShip = () => {
+  targetMode = false;
+  targetOrigin = { row: null, position: null };
+  targetDirection = null;
+  targetShipType = null;
+  firstComputerHit = false;
+  triedDirections = [];
+  targetAxis = null;
+  if (adjacentShipsArr.length > 0) {
+    const nextTarget = adjacentShipsArr.shift();
+    targetMode = true;
+    targetOrigin = {
+      row: nextTarget.row,
+      position: nextTarget.position,
+    };
+    targetShipType = nextTarget.shipType;
+    firstComputerHit = true;
+  }
+};
+
+const nextTarget = () => {
+  while (adjacentShipsArr.length) {
+    const next = adjacentShipsArr.shift();
+    if (userShips[next.shipType].length < shipSizes[next.shipType]) {
+      targetMode = true;
+      targetOrigin = { row: next.row, position: next.position };
+      targetShipType = next.shipType;
+      triedDirections = [];
+      targetDirection = null;
+      targetAxis = null;
+      return true;
+    }
+  }
+  return false;
+};
+
+const huntShipAfterHit = () => {
+  if (!targetMode || targetOrigin.row === null || !targetShipType) {
+    const alreadyAdded = nextTarget();
+    if (!alreadyAdded) {
+      resetTargetShip();
+      return false;
+    }
+  }
+
+  if (!targetMode || targetOrigin.row === null || !targetShipType) {
+    resetTargetShip();
+    return false;
+  }
+
+  if (userShips[targetShipType].length >= shipSizes[targetShipType]) {
+    resetTargetShip();
+    return false;
+  }
+
+  if (!targetDirection) {
+    const dirs = ["horizontal", "vertical"].filter(
+      (d) => !triedDirections.includes(d),
+    );
+    if (!dirs.length) {
+      resetTargetShip();
+      return false;
+    }
+    targetDirection = dirs[0];
+    triedDirections.push(targetDirection);
+    targetAxis = "positive";
+  }
+
+  let shotFired = false;
+
+  for (let attempt = 0; attempt < 2; attempt++) {
+    let stepRow = 0;
+    let stepCol = 0;
+
+    if (targetDirection === "horizontal") {
+      stepCol = targetAxis === "positive" ? 1 : -1;
+    } else {
+      stepRow = targetAxis === "positive" ? 1 : -1;
+    }
+
+    let r = targetOrigin.row;
+    let p = targetOrigin.position;
+    let target = null;
+
+    while (true) {
+      const next = getAdjacentCell(r, p, stepRow, stepCol);
+      if (!next) break;
+
+      if (computerStrikesGrid[next.row][next.position] === "") {
+        target = next;
+        break;
+      }
+
+      r = next.row;
+      p = next.position;
+    }
+
+    if (target) {
+      const { row, position } = target;
+      const cell = getCell("user", row, position);
+      const shipHere = userArr[row][position];
+
+      if (shipHere && shipSizes[shipHere]) {
+        computerStrikesGrid[row][position] = "hit";
+        handleCellHitCss(computerStrikesGrid, cell, row, position);
+        addShipStrikes(userShips, shipHere);
+
+        if (shipHere !== targetShipType) {
+          const alreadyAdded = adjacentShipsArr.some(
+            (ship) =>
+              ship.row === row &&
+              ship.position === position &&
+              ship.shipType === shipHere,
+          );
+
+          if (!alreadyAdded) {
+            adjacentShipsArr.push({
+              row,
+              position,
+              shipType: shipHere,
+            });
+          }
+        }
+      } else {
+        computerStrikesGrid[row][position] = "miss";
+        handleCellMissCss(computerStrikesGrid, cell, row, position);
+        targetAxis = targetAxis === "positive" ? "negative" : null;
+        if (!targetAxis) targetDirection = null;
+      }
+
+      shotFired = true;
+      break;
+    }
+
+    if (targetAxis === "positive") {
+      targetAxis = "negative";
+    } else {
+      targetAxis = null;
+      targetDirection = null;
+      break;
+    }
+  }
+  return shotFired;
+};
+
+const handleComputerSelection = (arr) => {
+  if (userGo || computerTurnLocked) return;
+  computerTurnLocked = true;
+  let shotFired = false;
+  
+  while (!shotFired) {
+    if (!targetMode) {
+      const [row, position] = randomComputerCoordinates();
+      const cell = getCell("user", row, position);
+
+      if (arr[row][position] === "hit" || arr[row][position] === "miss") {
+        continue;
+      }
+
+      const shipType = userArr[row][position];
+
+      if (shipSizes[shipType]) {
+        handleCellHitCss(arr, cell, row, position);
+        addShipStrikes(userShips, shipType);
+
+        targetMode = true;
+        targetOrigin = { row, position };
+        targetShipType = shipType;
+        triedDirections = [];
+        targetDirection = null;
+        targetAxis = null;
+      } else {
+        handleCellMissCss(arr, cell, row, position);
+      }
+
+      shotFired = true;
+    } else {
+      shotFired = huntShipAfterHit();
+    }
+  }
+
+  userGo = true;
+  setTimeout(handleComputerSunkShip, 2500);
+  computerTurnLocked = false;
 };
 
 const addShipStrikes = (shipObj, type) => {
@@ -219,25 +461,21 @@ const addShipStrikes = (shipObj, type) => {
 };
 
 const handleUserSelection = (arr, cell, row, position, shipType) => {
+  if (!userGo) return;
   if (arr[row][position] === "hit" || arr[row][position] === "miss") return;
-  const contentDiv = cell.querySelector(".cell__content");
   if (Object.keys(shipSizes).includes(shipType)) {
-    arr[row][position] = "hit";
+    handleCellHitCss(arr, cell, row, position);
     addShipStrikes(computerShips, shipType);
-    contentDiv.style.backgroundColor = "red";
-    cell.style.backgroundColor = "green";
-    contentDiv.style.border = "3px solid black";
   } else {
-    arr[row][position] = "miss";
-    contentDiv.style.backgroundColor = "white";
-    contentDiv.style.border = "3px solid black";
-    cell.style.backgroundColor = "#444";
+    handleCellMissCss(arr, cell, row, position);
   }
   setTimeout(() => {
-    handleSunkShip();
+    handleUserSunkShip();
   }, 2500);
-
-  console.log(userSrikesGrid);
+  userGo = !userGo;
+  setTimeout(() => {
+    handleComputerSelection(computerStrikesGrid);
+  }, 3000);
 };
 
 document.querySelectorAll(".grid__cell--computer").forEach((cell) =>
