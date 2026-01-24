@@ -1,0 +1,75 @@
+@use "../utils/" as u;
+
+.body {
+  background-image: url("../../assets/images/navy-fleet.jpg");
+}
+
+.game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.intro-pop-up {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: 70%;
+  height: 80%;
+  background-color: rgb(255, 255, 255, 0.85);
+  border: 6px solid darkgrey;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+
+  &__title {
+    color: rgb(44, 44, 44);
+    padding: 0;
+    margin: u.rem(20);
+  }
+}
+
+.instructions-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.instructions_main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background-color: azure;
+}
+
+.instructions-left,
+.instructions-right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.instructions-left {
+  background-color: beige;
+}
+.instructions-right {
+  background-color: rgb(142, 142, 138);
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: flex;
+}

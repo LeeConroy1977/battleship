@@ -15,6 +15,7 @@ html {
 }
 
 body {
+  position: relative;
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
@@ -114,6 +115,80 @@ p {
     opacity: 0;
   }
 }
+.body {
+  background-image: url("../../assets/images/navy-fleet.jpg");
+}
+
+.game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.intro-pop-up {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: 70%;
+  height: 80%;
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 6px solid darkgrey;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+.intro-pop-up__title {
+  color: rgb(44, 44, 44);
+  padding: 0;
+  margin: 1.25rem;
+}
+
+.instructions-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.instructions_main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background-color: azure;
+}
+
+.instructions-left,
+.instructions-right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.instructions-left {
+  background-color: beige;
+}
+
+.instructions-right {
+  background-color: rgb(142, 142, 138);
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: flex;
+}
+
 .user__grid,
 .computer__grid {
   position: relative;
@@ -159,10 +234,12 @@ p {
 }
 
 .cell__content {
+  position: absolute;
   width: 26px;
   height: 26px;
   border-radius: 50%;
   background-color: #292929;
+  z-index: 70;
 }
 
 .grid__cell {

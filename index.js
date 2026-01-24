@@ -1,5 +1,20 @@
+// create start pop-up
+// create rules pop-up
+// create sunkShip pop-up
+// create winner pop-up
+// 'Ship displays
+// intercom with multi arrays for messages
+// scss
+
 const computerGrid = document.querySelector(".computer__grid");
 const userGrid = document.querySelector(".user__grid");
+const instructionsBtn = document.querySelector(".instructions-right__btn");
+const instructionsScreen = document.querySelector(".instructions-screen");
+const startScreen = document.querySelector(".start-screen");
+const introPopUp = document.querySelector(".intro-pop-up");
+const game = document.querySelector(".game");
+const body = document.querySelector(".body");
+const endWar = document.querySelector(".console__btn");
 let userGo = true;
 let userWon = false;
 let computerWon = false;
@@ -13,25 +28,12 @@ let computerTurnLocked = false;
 let triedDirections = [];
 let targetAxis = null;
 let adjacentShipsArr = [];
-const gridArraySize = 9;
-const gridArraySizeCss = "nine";
-
-
-const computerArr = Array.from({ length: gridArraySize }, () =>
-  Array.from({ length: gridArraySize }, () => ""),
-);
-const userArr = Array.from({ length: gridArraySize }, () =>
-  Array.from({ length: gridArraySize }, () => ""),
-);
-
-const computerStrikesGrid = Array.from({ length: gridArraySize }, () =>
-  Array.from({ length: gridArraySize }, () => ""),
-);
-
-const userSrikesGrid = Array.from({ length: gridArraySize }, () =>
-  Array.from({ length: gridArraySize }, () => ""),
-);
-
+let gridArraySize = 9;
+let gridArraySizeCss = "eleven";
+let computerArr;
+let userArr;
+let computerStrikesGrid;
+let userSrikesGrid;
 const computerShips = { a: [], b: [], c: [], s: [], d: [] };
 const userShips = { a: [], b: [], c: [], s: [], d: [] };
 const shipSizes = {
@@ -43,6 +45,88 @@ const shipSizes = {
 };
 const computerSunkenShips = [];
 const userSunkenShips = [];
+
+instructionsBtn.addEventListener("click", () => {
+  instructionsScreen.classList.add("hidden");
+  startScreen.classList.remove("hidden");
+});
+
+endWar.addEventListener("click", () => {
+  introPopUp.classList.remove("hidden");
+  instructionsScreen.classList.remove("hidden");
+  startScreen.classList.add("hidden");
+  game.classList.add("hidden");
+  body.classList.add("body");
+  resetTargetShip();
+  userWon = false;
+  computerWon = false;
+  userGo = true;
+});
+
+document.querySelectorAll(".start-screen__btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const difficulty = btn.dataset.difficulty;
+
+    if (difficulty === "easy") {
+      gridArraySize = 9;
+      gridArraySizeCss = "nine";
+    } else if (difficulty === "medium") {
+      gridArraySize = 10;
+      gridArraySizeCss = "ten";
+    } else if (difficulty === "insane") {
+      gridArraySize = 11;
+      gridArraySizeCss = "eleven";
+    } else {
+      return;
+    }
+
+    userGrid.innerHTML = "";
+    computerGrid.innerHTML = "";
+    userGrid.classList.remove(
+      "user__grid--nine",
+      "user__grid--ten",
+      "user__grid--eleven",
+    );
+    computerGrid.classList.remove(
+      "computer__grid--nine",
+      "computer__grid--ten",
+      "computer__grid--eleven",
+    );
+
+    userGrid.classList.add(`user__grid--${gridArraySizeCss}`);
+    computerGrid.classList.add(`computer__grid--${gridArraySizeCss}`);
+
+    computerArr = Array.from({ length: gridArraySize }, () =>
+      Array(gridArraySize).fill(""),
+    );
+    userArr = Array.from({ length: gridArraySize }, () =>
+      Array(gridArraySize).fill(""),
+    );
+
+    computerStrikesGrid = Array.from({ length: gridArraySize }, () =>
+      Array(gridArraySize).fill(""),
+    );
+    userSrikesGrid = Array.from({ length: gridArraySize }, () =>
+      Array(gridArraySize).fill(""),
+    );
+
+    Object.keys(userShips).forEach((key) => (userShips[key] = []));
+    Object.keys(computerShips).forEach((key) => (computerShips[key] = []));
+    computerSunkenShips.length = 0;
+    userSunkenShips.length = 0;
+    userWon = false;
+    computerWon = false;
+    userGo = true;
+
+    populateUserGrid();
+    populateCompGrid();
+    shipPlacement();
+
+    introPopUp.classList.add("hidden");
+    game.classList.remove("hidden");
+    body.classList.remove("body");
+  });
+});
 
 const populateUserGrid = () => {
   userGrid.classList.add(`user__grid--${gridArraySizeCss}`);
@@ -81,8 +165,6 @@ const populateCompGrid = () => {
     }
   }
 };
-populateUserGrid();
-populateCompGrid();
 
 const randomNumbers = () => {
   const randomDirection = Math.ceil(Math.random() * 4);
@@ -190,7 +272,6 @@ const shipPlacement = () => {
     placeShips(computerArr, type, spaces);
   });
 };
-shipPlacement();
 
 const handleUserSunkShip = () => {
   for (const [shipType, hits] of Object.entries(computerShips)) {
@@ -270,7 +351,7 @@ const getAdjacentCell = (row, position, stepRow, stepPosition) => {
   return { row: newRow, position: newposition };
 };
 
-const resetTargetShip = () => {
+function resetTargetShip() {
   targetMode = false;
   targetOrigin = { row: null, position: null };
   targetDirection = null;
@@ -288,7 +369,7 @@ const resetTargetShip = () => {
     targetShipType = nextTarget.shipType;
     firstComputerHit = true;
   }
-};
+}
 
 const nextTarget = () => {
   while (adjacentShipsArr.length) {
@@ -419,7 +500,7 @@ const handleComputerSelection = (arr) => {
   if (userGo || computerTurnLocked) return;
   computerTurnLocked = true;
   let shotFired = false;
-  
+
   while (!shotFired) {
     if (!targetMode) {
       const [row, position] = randomComputerCoordinates();
@@ -477,12 +558,3 @@ const handleUserSelection = (arr, cell, row, position, shipType) => {
     handleComputerSelection(computerStrikesGrid);
   }, 3000);
 };
-
-document.querySelectorAll(".grid__cell--computer").forEach((cell) =>
-  cell.addEventListener("click", () => {
-    const row = Number(cell.dataset.row);
-    const position = Number(cell.dataset.position);
-    const shipType = computerArr[row][position];
-    return handleUserSelection(userSrikesGrid, cell, row, position, shipType);
-  }),
-);
