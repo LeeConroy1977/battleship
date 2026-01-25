@@ -1,17 +1,79 @@
+@use "../utils/" as u;
+@use "../globals/" as g;
+
 .winner-pop-up {
   position: fixed;
   inset: 0;
   margin: auto;
   width: 70%;
-  height: 80%;
+  height: 90%;
   background-color: rgb(255, 255, 255, 0.95);
   border: 6px solid darkgrey;
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   border-radius: 12px;
+  padding: u.rem(25);
+
+  &__title {
+    color: rgb(44, 44, 44);
+    padding: 0;
+    margin: u.rem(10);
+    font-family: u.$logoFont;
+    font-size: u.rem(56);
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.left-section,
+.right-section {
+  height: 100%;
+  display: flex;
+}
+
+.left-section {
+  width: 40%;
+  justify-content: center;
+  align-items: center;
+
+  &__img {
+    width: 70%;
+    height: 60%;
+  }
+}
+
+.right-section {
+  width: 60%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: u.rem(50);
+
+  &__statement {
+    font-size: u.rem(42);
+    padding: u.rem(40);
+    margin-top: u.rem(100);
+  }
+
+  &__btn {
+    margin-top: auto;
+    margin-bottom: u.rem(120);
+    padding: u.rem(20) u.rem(120);
+    border-radius: u.rem(12);
+    font-size: u.rem(18);
+    background-color: #306b34;
+    color: g.$text-colour;
+    font-weight: 600;
+    cursor: pointer;
+  }
 }
 
 .hidden {

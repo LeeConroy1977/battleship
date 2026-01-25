@@ -19,7 +19,9 @@
     border-radius: u.rem(12);
     cursor: pointer;
     margin: auto 0;
-    font-size: u.rem(16);
+    font-size: u.rem(18);
+    font-family: u.$logoFont;
+    letter-spacing: u.rem(1.5);
   }
 }
 

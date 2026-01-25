@@ -268,13 +268,13 @@ img {
   font-weight: 600;
 }
 .start-right__btn--one {
-  background-color: green;
+  background-color: #306b34;
 }
 .start-right__btn--two {
-  background-color: orange;
+  background-color: #ffd25a;
 }
 .start-right__btn--three {
-  background-color: red;
+  background-color: #ba1200;
 }
 
 .sunk-ship-pop-up {
@@ -287,10 +287,25 @@ img {
   border: 6px solid darkgrey;
   z-index: 1000;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   border-radius: 12px;
+  padding: 1.5625rem;
+}
+.sunk-ship-pop-up__title {
+  color: rgb(44, 44, 44);
+  padding: 0;
+  margin: 0.625rem;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3.5rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
 }
 
 .left-section,
@@ -312,14 +327,14 @@ img {
 .right-section {
   width: 60%;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 3.125rem;
 }
 .right-section__statement {
   font-size: 2.625rem;
   padding: 2.5rem;
-  margin-top: 1.5625rem;
+  margin-top: 6.25rem;
 }
 .right-section__btn {
   margin-top: auto;
@@ -342,15 +357,69 @@ img {
   inset: 0;
   margin: auto;
   width: 70%;
-  height: 80%;
+  height: 90%;
   background-color: rgba(255, 255, 255, 0.95);
   border: 6px solid darkgrey;
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   border-radius: 12px;
+  padding: 1.5625rem;
+}
+.winner-pop-up__title {
+  color: rgb(44, 44, 44);
+  padding: 0;
+  margin: 0.625rem;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3.5rem;
+}
+.winner-pop-up__main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.left-section,
+.right-section {
+  height: 100%;
+  display: flex;
+}
+
+.left-section {
+  width: 40%;
+  justify-content: center;
+  align-items: center;
+}
+.left-section__img {
+  width: 70%;
+  height: 60%;
+}
+
+.right-section {
+  width: 60%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 3.125rem;
+}
+.right-section__statement {
+  font-size: 2.625rem;
+  padding: 2.5rem;
+  margin-top: 6.25rem;
+}
+.right-section__btn {
+  margin-top: auto;
+  margin-bottom: 7.5rem;
+  padding: 1.25rem 7.5rem;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+  background-color: #306b34;
+  color: #fbfff1;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .hidden {
@@ -434,7 +503,9 @@ img {
   border-radius: 0.75rem;
   cursor: pointer;
   margin: auto 0;
-  font-size: 1rem;
+  font-size: 1.125rem;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.09375rem;
 }
 
 .radar,

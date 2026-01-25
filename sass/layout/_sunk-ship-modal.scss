@@ -11,11 +11,28 @@
   border: 6px solid darkgrey;
   z-index: 1000;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   border-radius: 12px;
+  padding: u.rem(25);
+
+  &__title {
+    color: rgb(44, 44, 44);
+    padding: 0;
+    margin: u.rem(10);
+    font-family: u.$logoFont;
+    font-size: u.rem(56);
+  }
 }
+
+.main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
 .left-section,
 .right-section {
   height: 100%;
@@ -36,14 +53,14 @@
 .right-section {
   width: 60%;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: u.rem(50);
 
   &__statement {
     font-size: u.rem(42);
     padding: u.rem(40);
-    margin-top: u.rem(25);
+    margin-top: u.rem(100);
   }
 
   &__btn {

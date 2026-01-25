@@ -19,11 +19,11 @@ const startScreen = document.querySelector(".start-screen");
 const introPopUp = document.querySelector(".intro-pop-up");
 const game = document.querySelector(".game");
 const body = document.querySelector(".body");
-const endWar = document.querySelector(".console__btn");
+const selfDestruct = document.querySelector(".console__btn");
 const sunkShipModal = document.querySelector(".sunk-ship-pop-up");
 const sunkShipModalBtn = document.querySelector(".right-section__btn");
 const winnerPopUp = document.querySelector(".winner-pop-up");
-const winnerPopUpBtn = document.querySelector(".winner-pop-up__btn");
+const winnerPopUpBtn = document.querySelector(".right-section__btn");
 const shipDisplayComp = document.querySelector(".ships__container--computer");
 const shipDisplayUser = document.querySelector(".ships__container--user");
 const imageContainer = document.querySelector(".image-container__image");
@@ -98,8 +98,11 @@ instructionsBtn.addEventListener("click", () => {
   resetGame();
 });
 
-endWar.addEventListener("click", () => {
-  restartGame();
+selfDestruct.addEventListener("click", () => {
+  new Audio("./assets/sounds/bomb-explosion-469038.mp3").play();
+  setTimeout(() => {
+    restartGame();
+  }, 1500);
 });
 
 sunkShipModalBtn.addEventListener("click", () => {
