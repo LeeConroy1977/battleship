@@ -194,7 +194,7 @@ li {
   padding: 1rem 5rem;
   border-radius: 0.75rem;
   font-size: 1.375rem;
-  background-color: green;
+  background-color: #306b34;
   color: white;
   font-family: "Bebas Neue", sans-serif;
   margin-left: auto;
@@ -282,15 +282,55 @@ img {
   inset: 0;
   margin: auto;
   width: 70%;
-  height: 80%;
+  height: 90%;
   background-color: rgba(255, 255, 255, 0.95);
   border: 6px solid darkgrey;
   z-index: 1000;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 12px;
+}
+
+.left-section,
+.right-section {
+  height: 100%;
+  display: flex;
+}
+
+.left-section {
+  width: 40%;
+  justify-content: center;
+  align-items: center;
+}
+.left-section__img {
+  width: 70%;
+  height: 60%;
+}
+
+.right-section {
+  width: 60%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3.125rem;
+}
+.right-section__statement {
+  font-size: 2.625rem;
+  padding: 2.5rem;
+  margin-top: 1.5625rem;
+}
+.right-section__btn {
+  margin-top: auto;
+  margin-bottom: 7.5rem;
+  padding: 1.25rem 7.5rem;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+  background-color: #306b34;
+  color: #fbfff1;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .hidden {

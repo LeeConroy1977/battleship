@@ -1,3 +1,16 @@
+import {
+  aSunk,
+  bSunk,
+  cSunk,
+  sSunk,
+  dSunk,
+  aWin,
+  bWin,
+  cWin,
+  sWin,
+  dWin,
+} from "./utils/data/sunkShipStatements.js";
+
 const computerGrid = document.querySelector(".computer__grid");
 const userGrid = document.querySelector(".user__grid");
 const instructionsBtn = document.querySelector(".instructions-right__btn");
@@ -8,12 +21,13 @@ const game = document.querySelector(".game");
 const body = document.querySelector(".body");
 const endWar = document.querySelector(".console__btn");
 const sunkShipModal = document.querySelector(".sunk-ship-pop-up");
-const sunkShipModalBtn = document.querySelector(".sunk-ship-pop-up__btn");
+const sunkShipModalBtn = document.querySelector(".right-section__btn");
 const winnerPopUp = document.querySelector(".winner-pop-up");
 const winnerPopUpBtn = document.querySelector(".winner-pop-up__btn");
 const shipDisplayComp = document.querySelector(".ships__container--computer");
 const shipDisplayUser = document.querySelector(".ships__container--user");
 const imageContainer = document.querySelector(".image-container__image");
+const sunkStatement = document.querySelector(".right-section__statement");
 let userGo = true;
 let userWon = false;
 let computerWon = false;
@@ -33,6 +47,7 @@ let computerArr;
 let userArr;
 let computerStrikesGrid;
 let userSrikesGrid;
+let sunkShipsStatement = "";
 const computerSunkenShips = [];
 const userSunkenShips = [];
 const computerShips = { a: [], b: [], c: [], s: [], d: [] };
@@ -71,7 +86,7 @@ const restartGame = () => {
   game.classList.add("hidden");
   body.classList.add("body");
   winnerPopUp.classList.add("hidden");
-  sh.classList.add("hidden");
+  sunkShipModal.classList.add("hidden");
   resetTargetShip();
   removeShipDisplayClass();
   resetGame();
@@ -90,6 +105,29 @@ endWar.addEventListener("click", () => {
 sunkShipModalBtn.addEventListener("click", () => {
   sunkShipModal.classList.add("hidden");
 });
+
+const handleSunkShipStatement = (shipType, status) => {
+  let statementsArray = [];
+  if (status === "Sunk") {
+    if (shipType === "a") statementsArray = aSunk;
+    if (shipType === "b") statementsArray = bSunk;
+    if (shipType === "c") statementsArray = cSunk;
+    if (shipType === "s") statementsArray = sSunk;
+    if (shipType === "d") statementsArray = dSunk;
+  } else if (status === "Win") {
+    if (shipType === "a") statementsArray = aWin;
+    if (shipType === "b") statementsArray = bWin;
+    if (shipType === "c") statementsArray = cWin;
+    if (shipType === "s") statementsArray = sWin;
+    if (shipType === "d") statementsArray = dWin;
+  }
+  const randomStatement =
+    statementsArray[Math.floor(Math.random() * statementsArray.length)];
+  sunkShipsStatement = randomStatement;
+  if (sunkStatement) {
+    sunkStatement.textContent = `"${sunkShipsStatement}"`;
+  }
+};
 
 winnerPopUpBtn.addEventListener("click", () => {
   restartGame();
@@ -114,11 +152,11 @@ const handleShipDisplay = (player, shipType) => {
   document.querySelector(`.${shipType}__${player}`).classList.add("visability");
 };
 
-const removeShipDisplayClass = () => {
+function removeShipDisplayClass() {
   document.querySelectorAll(".ship-image").forEach((image) => {
     image.classList.remove("visability");
   });
-};
+}
 
 const userHitEffect = (element) => {
   const originalBg =
@@ -211,7 +249,6 @@ document.querySelectorAll(".start-right__btn").forEach((btn) => {
     game.classList.remove("hidden");
     body.classList.remove("body");
     bgMusic.muted = false;
-    document.removeEventListener("click", enableAudio);
   });
 });
 
@@ -371,6 +408,7 @@ const handleUserSunkShip = () => {
     const required = shipSizes[shipType];
     if (hits.length >= required && !computerSunkenShips.includes(shipType)) {
       computerSunkenShips.push(shipType);
+      handleSunkShipStatement(shipType, "Sunk");
       newlySunk = true;
 
       if (computerSunkenShips.length < Object.keys(shipSizes).length) {
@@ -394,6 +432,7 @@ const handleComputerSunkShip = () => {
 
     if (hits.length >= required && !userSunkenShips.includes(shipType)) {
       userSunkenShips.push(shipType);
+      handleSunkShipStatement(shipType, "Win");
       newlySunk = true;
 
       if (userSunkenShips.length < Object.keys(shipSizes).length) {

@@ -14,6 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet" />
     <link rel="stylesheet" href="./sass/styles.css" />
+    <script defer type="module" src="./index.js"></script>
     <title>Battleship</title>
   </head>
   <body class="body">
@@ -118,7 +119,7 @@
                 alt="" />
             </div>
             <div class="message-container">
-              <p class="message-container__name">Admiral Arnold J Rimmer:</p>
+              <p class="message-container__name">Admiral A J Rimmer:</p>
               <p class="message-container__message"></p>
             </div>
           </div>
@@ -252,11 +253,19 @@
       </div>
     </div>
     <div class="sunk-ship-pop-up hidden">
-      <button class="sunk-ship-pop-up__btn">Continue</button>
+      <section class="left-section">
+        <img
+          class="left-section__img"
+          src="./assets/images/admiral rimmer-Picsart-BackgroundRemover.jpg"
+          alt="" />
+      </section>
+      <section class="right-section">
+        <p class="right-section__statement"></p>
+        <button class="right-section__btn">Continue</button>
+      </section>
     </div>
     <div class="winner-pop-up hidden">
       <button class="winner-pop-up__btn">Restart Game</button>
     </div>
   </body>
-  <script defer src="./index.js"></script>
 </html>
