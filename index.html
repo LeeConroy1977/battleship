@@ -8,6 +8,11 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
     <link rel="stylesheet" href="./sass/styles.css" />
     <title>Battleship</title>
   </head>
@@ -15,10 +20,55 @@
     <div class="game hidden">
       <div class="grid">
         <div class="header-display">
-          <div class="header-display__ships header-display__ships--user"></div>
-          <div
-            class="header-display__ships header-display__ships--computer"></div>
-          <h1 class="header-display__title">Battleship</h1>
+          <div class="display__ships display__ships--user">
+            <div class="ships__container--computer">
+              <img
+                class="ship-image a__computer"
+                src="./assets//images/aircraft-carrier.svg"
+                alt="" />
+              <img
+                class="ship-image b__computer"
+                src="./assets//images/battleship.svg"
+                alt="" />
+              <img
+                class="ship-image c__computer"
+                src="./assets//images/cruiser.svg"
+                alt="" />
+              <img
+                class="ship-image s__computer"
+                src="./assets//images/submarine.svg"
+                alt="" />
+              <img
+                class="ship-image d__computer"
+                src="./assets//images/destroyer.svg"
+                alt="" />
+            </div>
+          </div>
+          <div class="display__ships display__ships--computer">
+            <div class="ships__container--user">
+              <img
+                class="ship-image a__user"
+                src="./assets//images/aircraft-carrier.svg"
+                alt="" />
+              <img
+                class="ship-image b__user"
+                src="./assets//images/battleship.svg"
+                alt="" />
+              <img
+                class="ship-image c__user"
+                src="./assets//images/cruiser.svg"
+                alt="" />
+              <img
+                class="ship-image s__user"
+                src="./assets//images/submarine.svg"
+                alt="" />
+              <img
+                class="ship-image d__user"
+                src="./assets//images/destroyer.svg"
+                alt="" />
+            </div>
+          </div>
+          <h1 class="display__title">Battleship</h1>
         </div>
         <section class="grid__section grid__section--computer">
           <div class="computer__grid"></div>
@@ -41,7 +91,7 @@
             </div>
             <div class="controls">
               <div class="controls__grid">
-                <div class="controls__display controls__display--top-left">
+                <!-- <div class="controls__display controls__display--top-left">
                   <div class="controls__dial controls__dial--top-left"></div>
                 </div>
                 <div class="controls__display controls__display--top-right">
@@ -53,16 +103,24 @@
                 <div class="controls__display controls__display--bottom-right">
                   <div
                     class="controls__dial controls__dial--bottom-right"></div>
-                </div>
+                </div> -->
               </div>
             </div>
-            <button class="console__btn">End War</button>
+            <button class="console__btn">RUN AWAY</button>
           </div>
         </section>
         <section class="grid__section grid__section--intercom">
           <div class="intercom">
-            <div class="intercom__image-container"></div>
-            <div class="intercom__message-container"></div>
+            <div class="intercom__image-container">
+              <img
+                class="image-container__image"
+                src="./assets/images/admiral rimmer-Picsart-BackgroundRemover.jpg"
+                alt="" />
+            </div>
+            <div class="message-container">
+              <p class="message-container__name">Admiral Arnold J Rimmer:</p>
+              <p class="message-container__message"></p>
+            </div>
           </div>
         </section>
       </div>
@@ -74,30 +132,110 @@
           <section class="instructions-left">
             <div class="instructions-left__container">
               <h2>High Command Briefing</h2>
+              <p class="briefing__intro">
+                <strong>CAPTAIN, ATTENTION.</strong>
+              </p>
+
+              <p>Long-range scanners confirm the worst possible scenario.</p>
+
+              <p>
+                The enemy fleet is not commanded by a ruthless warlord…<br />
+                nor a brilliant tactician…
+              </p>
+
+              <p>
+                It is under the absolute, unshakable authority of<br />
+                <strong>Admiral Arnold Judas Rimmer, BSc, SSc.</strong>
+              </p>
+
+              <p>
+                Despite overwhelming evidence to the contrary, he insists this
+                engagement will be recorded as
+                <em>“a textbook demonstration of flawless naval doctrine.”</em>
+              </p>
+
+              <hr class="briefing__divider" />
+
+              <h2 class="briefing__section-title">🎯 MISSION OBJECTIVE</h2>
+
+              <p>Your task is brutally simple:</p>
+
+              <ul class="briefing__list">
+                <li>Locate and destroy Rimmer’s entire fleet</li>
+                <li>
+                  Sink every vessel before he can declare victory by paperwork
+                </li>
+              </ul>
+
+              <p>
+                You will command a full naval strike group deployed across the
+                grid. Rimmer has done the same — and will loudly remind everyone
+                of his rank at every opportunity.
+              </p>
             </div>
           </section>
           <section class="instructions-right">
+            <h2 class="briefing__section-title">🗺️ RULES OF ENGAGEMENT</h2>
+
+            <ul class="briefing__list">
+              <li>Select a coordinate on the enemy grid each turn</li>
+              <li>Direct hits damage enemy vessels</li>
+              <li>
+                Misses will be met with smug commentary and incorrect
+                regulations
+              </li>
+              <li>Destroy all sections of a ship to sink it</li>
+            </ul>
+
+            <h2 class="briefing__section-title">🚨 COMBAT CONDITIONS</h2>
+
+            <ul class="briefing__list">
+              <li>The enemy adapts after successful hits</li>
+              <li>
+                Expect erratic targeting once Rimmer believes he is winning
+              </li>
+              <li>Victory may trigger an immediate rant</li>
+            </ul>
+
+            <h2 class="briefing__section-title">🏆 VICTORY CONDITIONS</h2>
+
+            <ul class="briefing__list">
+              <li>All enemy ships sunk — you win the war</li>
+              <li>Rimmer will blame sensors, crew morale, or you</li>
+            </ul>
+
             <button class="instructions-right__btn">Next</button>
           </section>
         </main>
       </div>
       <div class="start-screen hidden">
-        <button
-          data-difficulty="easy"
-          class="start-screen__btn start-screen__btn--one">
-          Easy
-        </button>
-        <button
-          data-difficulty="medium"
-          class="start-screen__btn start-screen__btn--two">
-          Medium
-        </button>
-        <button
-          data-difficulty="insane"
-          class="start-screen__btn start-screen__btn--three">
-          Insane
-        </button>
+        <main class="start-main">
+          <section class="start-left"></section>
+          <section class="start-right">
+            <button
+              data-difficulty="easy"
+              class="start-right__btn start-right__btn--one">
+              Easy
+            </button>
+            <button
+              data-difficulty="medium"
+              class="start-right__btn start-right__btn--two">
+              Medium
+            </button>
+            <button
+              data-difficulty="insane"
+              class="start-right__btn start-right__btn--three">
+              Insane
+            </button>
+          </section>
+        </main>
       </div>
+    </div>
+    <div class="sunk-ship-pop-up hidden">
+      <button class="sunk-ship-pop-up__btn">Continue</button>
+    </div>
+    <div class="winner-pop-up hidden">
+      <button class="winner-pop-up__btn">Restart Game</button>
     </div>
   </body>
   <script defer src="./index.js"></script>

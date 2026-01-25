@@ -11,13 +11,15 @@
   gap: u.rem(12);
 
   &__btn {
-    padding: u.rem(10) u.rem(16);
-    background-color: rgb(206, 23, 23);
+    padding: u.rem(14) u.rem(16);
+    background-color: rgb(220, 20, 20);
     color: white;
     font-weight: 700;
     width: 80%;
     border-radius: u.rem(12);
     cursor: pointer;
+    margin: auto 0;
+    font-size: u.rem(16);
   }
 }
 
@@ -26,6 +28,7 @@
   width: 100%;
   background-color: rgb(25, 25, 26);
   font-size: u.rem(18);
+  box-shadow: g.$inner-shadow;
 }
 
 .radar {
@@ -117,9 +120,8 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
   width: 100%;
-  height: 50%;
+  height: 44%;
   border-bottom-left-radius: u.rem(12);
   border-bottom-right-radius: u.rem(12);
 

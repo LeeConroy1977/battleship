@@ -1,0 +1,126 @@
+@use "../utils/" as u;
+
+.body {
+  background-image: url("../../assets/images/navy-fleet.jpg");
+}
+
+.game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.intro-pop-up {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: 70%;
+  height: 90%;
+  background-color: rgb(255, 255, 255, 0.85);
+  border: 6px solid darkgrey;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  padding: u.rem(25);
+
+  &__title {
+    color: rgb(44, 44, 44);
+    padding: 0;
+    margin: u.rem(10);
+    font-family: u.$logoFont;
+    font-size: u.rem(56);
+  }
+}
+
+.instructions-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.instructions_main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.instructions-left,
+.instructions-right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: u.rem(25);
+  color: rgb(37, 36, 36);
+}
+
+p {
+  font-size: u.rem(18);
+}
+
+.instructions-left {
+  color: rgb(37, 36, 36);
+}
+.instructions-right {
+  &__btn {
+    padding: u.rem(16) u.rem(80);
+    border-radius: u.rem(12);
+    font-size: u.rem(22);
+    background-color: red;
+    color: white;
+    font-family: u.$logoFont;
+    margin-left: auto;
+    margin-top: auto;
+    cursor: pointer;
+  }
+}
+
+.briefing__intro {
+  color: rgb(37, 36, 36);
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: flex;
+}
+
+.start-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.start_main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.start-left,
+.start-right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.start-left {
+}
+.start-right {
+}

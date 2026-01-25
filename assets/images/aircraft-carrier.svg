@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="62.383255mm"
+   height="15.082267mm"
+   viewBox="0 0 62.383255 15.082267"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="aircraft-carrier.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="4.0970529"
+     inkscape:cx="113.86233"
+     inkscape:cy="40.150812"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-5.5537887,-15.563524)">
+    <g
+       id="g1"
+       style="fill:#afafaf;fill-opacity:1"
+       transform="matrix(0.873706,0,0,0.75165679,4.2457645,9.3299335)">
+      <path
+         style="fill:#afafaf;fill-opacity:1;stroke-width:0.264583"
+         d="M 6.0058413,18.792472 H 68.389097 l -4.084452,7.074477 H 16.209314 Z"
+         id="path1" />
+      <rect
+         style="fill:#afafaf;fill-opacity:1;stroke-width:0.264583"
+         id="rect1"
+         width="8.9764729"
+         height="10.849262"
+         x="54.827518"
+         y="10.784682" />
+    </g>
+  </g>
+</svg>

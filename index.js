@@ -1,11 +1,3 @@
-// create start pop-up
-// create rules pop-up
-// create sunkShip pop-up
-// create winner pop-up
-// 'Ship displays
-// intercom with multi arrays for messages
-// scss
-
 const computerGrid = document.querySelector(".computer__grid");
 const userGrid = document.querySelector(".user__grid");
 const instructionsBtn = document.querySelector(".instructions-right__btn");
@@ -15,6 +7,13 @@ const introPopUp = document.querySelector(".intro-pop-up");
 const game = document.querySelector(".game");
 const body = document.querySelector(".body");
 const endWar = document.querySelector(".console__btn");
+const sunkShipModal = document.querySelector(".sunk-ship-pop-up");
+const sunkShipModalBtn = document.querySelector(".sunk-ship-pop-up__btn");
+const winnerPopUp = document.querySelector(".winner-pop-up");
+const winnerPopUpBtn = document.querySelector(".winner-pop-up__btn");
+const shipDisplayComp = document.querySelector(".ships__container--computer");
+const shipDisplayUser = document.querySelector(".ships__container--user");
+const imageContainer = document.querySelector(".image-container__image");
 let userGo = true;
 let userWon = false;
 let computerWon = false;
@@ -34,6 +33,8 @@ let computerArr;
 let userArr;
 let computerStrikesGrid;
 let userSrikesGrid;
+const computerSunkenShips = [];
+const userSunkenShips = [];
 const computerShips = { a: [], b: [], c: [], s: [], d: [] };
 const userShips = { a: [], b: [], c: [], s: [], d: [] };
 const shipSizes = {
@@ -43,27 +44,92 @@ const shipSizes = {
   s: 3,
   d: 2,
 };
-const computerSunkenShips = [];
-const userSunkenShips = [];
 
-instructionsBtn.addEventListener("click", () => {
-  instructionsScreen.classList.add("hidden");
-  startScreen.classList.remove("hidden");
+const bgMusic = new Audio(
+  "./assets/sounds/this-is-suspense-end-of-the-line-181766.mp3",
+);
+bgMusic.loop = true;
+bgMusic.volume = 0.8;
+bgMusic.muted = false;
+
+window.addEventListener("load", () => {
+  bgMusic.play().catch(() => {});
 });
 
-endWar.addEventListener("click", () => {
+const resetGame = () => {
+  userGo = true;
+  userWon = false;
+  computerWon = false;
+  firstComputerHit = false;
+};
+
+const restartGame = () => {
   introPopUp.classList.remove("hidden");
   instructionsScreen.classList.remove("hidden");
   startScreen.classList.add("hidden");
   game.classList.add("hidden");
   body.classList.add("body");
+  winnerPopUp.classList.add("hidden");
   resetTargetShip();
-  userWon = false;
-  computerWon = false;
-  userGo = true;
+  resetGame();
+};
+
+instructionsBtn.addEventListener("click", () => {
+  instructionsScreen.classList.add("hidden");
+  startScreen.classList.remove("hidden");
+  resetGame();
 });
 
-document.querySelectorAll(".start-screen__btn").forEach((btn) => {
+endWar.addEventListener("click", () => {
+  restartGame();
+});
+
+sunkShipModalBtn.addEventListener("click", () => {
+  sunkShipModal.classList.add("hidden");
+});
+
+winnerPopUpBtn.addEventListener("click", () => {
+  restartGame();
+});
+
+const handleGameWinner = (player) => {
+  setTimeout(() => {
+    sunkShipModal.classList.add("hidden");
+    winnerPopUp.classList.remove("hidden");
+
+    let title = winnerPopUp.querySelector("h1");
+    if (!title) {
+      title = document.createElement("h1");
+      winnerPopUp.appendChild(title);
+    }
+    title.textContent = `${player} Won the battle!`;
+    userGo = false;
+  }, 1500);
+};
+
+const handleShipDisplay = (player, shipType) => {
+  document.querySelector(`.${shipType}__${player}`).classList.add("visability");
+};
+
+const userHitEffect = (element) => {
+  const originalBg =
+    element === body ? "hsl(150, 15%, 13%)" : "rgb(25, 25, 26)";
+  setTimeout(() => {
+    element.style.backgroundColor = "red";
+  }, 150);
+  setTimeout(() => {
+    element.style.backgroundColor = "orange";
+  }, 300);
+  setTimeout(() => {
+    element.style.backgroundColor = "red";
+  }, 450);
+  setTimeout(() => {
+    element.style.backgroundColor = "orange";
+  }, 600);
+  setTimeout(() => (element.style.backgroundColor = originalBg), 750);
+};
+
+document.querySelectorAll(".start-right__btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     const difficulty = btn.dataset.difficulty;
 
@@ -125,6 +191,8 @@ document.querySelectorAll(".start-screen__btn").forEach((btn) => {
     introPopUp.classList.add("hidden");
     game.classList.remove("hidden");
     body.classList.remove("body");
+    bgMusic.muted = false;
+    document.removeEventListener("click", enableAudio);
   });
 });
 
@@ -208,6 +276,10 @@ const placeShipsUserDisplay = (
       const innerShip = document.createElement("div");
       shipDisplayDiv.classList.add(`ship__${shipType}`);
       shipDisplayDiv.classList.add(`ship__${shipType}--${direction}`);
+      shipDisplayDiv.classList.add(
+        `${shipType}__${direction}--${gridArraySizeCss}`,
+      );
+
       innerShip.classList.add(`ship__${shipType}--inner-ship`);
       cell.appendChild(shipDisplayDiv);
       shipDisplayDiv.appendChild(innerShip);
@@ -274,36 +346,47 @@ const shipPlacement = () => {
 };
 
 const handleUserSunkShip = () => {
+  let newlySunk = false;
+
   for (const [shipType, hits] of Object.entries(computerShips)) {
     const required = shipSizes[shipType];
-
     if (hits.length >= required && !computerSunkenShips.includes(shipType)) {
       computerSunkenShips.push(shipType);
+      newlySunk = true;
 
-      const totalShips = Object.keys(shipSizes).length;
-
-      if (computerSunkenShips.length === totalShips) {
-        userWon = true;
-      } else {
-        alert(`You sank my ${shipType}!`);
+      if (computerSunkenShips.length < Object.keys(shipSizes).length) {
+        sunkShipModal.classList.remove("hidden");
+        handleShipDisplay("computer", shipType);
       }
     }
+  }
+
+  if (computerSunkenShips.length === Object.keys(shipSizes).length) {
+    userWon = true;
+    handleGameWinner("You");
   }
 };
 
 const handleComputerSunkShip = () => {
+  let newlySunk = false;
+
   for (const [shipType, hits] of Object.entries(userShips)) {
     const required = shipSizes[shipType];
+
     if (hits.length >= required && !userSunkenShips.includes(shipType)) {
       userSunkenShips.push(shipType);
-      const totalShips = Object.keys(shipSizes).length;
-      if (userSunkenShips.length === totalShips) {
-        computerWon = true;
-        return;
-      } else {
-        alert(`Computer sank your ${shipType}!`);
+      newlySunk = true;
+
+      if (userSunkenShips.length < Object.keys(shipSizes).length) {
+        sunkShipModal.classList.remove("hidden");
+        handleShipDisplay("user", shipType);
       }
     }
+  }
+
+  if (userSunkenShips.length === Object.keys(shipSizes).length) {
+    computerWon = true;
+    handleGameWinner("Computer");
   }
 };
 
@@ -457,6 +540,9 @@ const huntShipAfterHit = () => {
         computerStrikesGrid[row][position] = "hit";
         handleCellHitCss(computerStrikesGrid, cell, row, position);
         addShipStrikes(userShips, shipHere);
+        userHitEffect(body);
+        userHitEffect(shipDisplayUser);
+        new Audio("./assets/sounds/explosion-sound-effect-425455.mp3").play();
 
         if (shipHere !== targetShipType) {
           const alreadyAdded = adjacentShipsArr.some(
@@ -477,6 +563,8 @@ const huntShipAfterHit = () => {
       } else {
         computerStrikesGrid[row][position] = "miss";
         handleCellMissCss(computerStrikesGrid, cell, row, position);
+        new Audio("./assets/sounds/launching-missile-313226.mp3").play();
+
         targetAxis = targetAxis === "positive" ? "negative" : null;
         if (!targetAxis) targetDirection = null;
       }
@@ -515,6 +603,9 @@ const handleComputerSelection = (arr) => {
       if (shipSizes[shipType]) {
         handleCellHitCss(arr, cell, row, position);
         addShipStrikes(userShips, shipType);
+        userHitEffect(body);
+        userHitEffect(shipDisplayUser);
+        new Audio("./assets/sounds/explosion-sound-effect-425455.mp3").play();
 
         targetMode = true;
         targetOrigin = { row, position };
@@ -524,6 +615,7 @@ const handleComputerSelection = (arr) => {
         targetAxis = null;
       } else {
         handleCellMissCss(arr, cell, row, position);
+        new Audio("./assets/sounds/launching-missile-313226.mp3").play();
       }
 
       shotFired = true;
@@ -547,8 +639,12 @@ const handleUserSelection = (arr, cell, row, position, shipType) => {
   if (Object.keys(shipSizes).includes(shipType)) {
     handleCellHitCss(arr, cell, row, position);
     addShipStrikes(computerShips, shipType);
+    userHitEffect(shipDisplayComp);
+    userHitEffect(imageContainer);
+    new Audio("./assets/sounds/explosion-sound-effect-425455.mp3").play();
   } else {
     handleCellMissCss(arr, cell, row, position);
+    new Audio("./assets/sounds/launching-missile-313226.mp3").play();
   }
   setTimeout(() => {
     handleUserSunkShip();
@@ -558,3 +654,12 @@ const handleUserSelection = (arr, cell, row, position, shipType) => {
     handleComputerSelection(computerStrikesGrid);
   }, 3000);
 };
+
+computerGrid.addEventListener("click", (e) => {
+  const cell = e.target.closest(".grid__cell--computer");
+  if (!cell) return;
+  const row = Number(cell.dataset.row);
+  const position = Number(cell.dataset.position);
+  const shipType = computerArr[row][position];
+  handleUserSelection(userSrikesGrid, cell, row, position, shipType);
+});

@@ -1,0 +1,19 @@
+.sunk-ship-pop-up {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: 70%;
+  height: 80%;
+  background-color: rgb(255, 255, 255, 0.95);
+  border: 6px solid darkgrey;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.hidden {
+  display: none;
+}

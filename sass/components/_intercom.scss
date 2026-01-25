@@ -10,20 +10,42 @@
   border-radius: u.rem(12);
 
   &__image-container {
-    width: 20%;
+    width: 18%;
     height: 100%;
     background-color: rgb(203, 208, 212);
     border-top-left-radius: u.rem(12);
     border-bottom-left-radius: u.rem(12);
     box-shadow: g.$inner-shadow;
+    padding: u.rem(12);
+    padding-bottom: u.rem(2);
+    background-color: rgb(25, 25, 26);
   }
+}
 
-  &__message-container {
-    width: 80%;
+.image-container {
+  &__image {
+    width: 90%;
     height: 100%;
     background-color: rgb(25, 25, 26);
-    border-top-right-radius: u.rem(12);
-    border-bottom-right-radius: u.rem(12);
-    box-shadow: g.$inner-shadow;
+  }
+}
+
+.message-container {
+  width: 82%;
+  height: 100%;
+  background-color: rgb(25, 25, 26);
+  border-top-right-radius: u.rem(12);
+  border-bottom-right-radius: u.rem(12);
+  box-shadow: g.$inner-shadow;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: u.rem(14);
+
+  &__name {
+    color: rgb(54, 209, 54);
+    font-size: u.rem(16);
+    line-height: u.rem(40);
   }
 }

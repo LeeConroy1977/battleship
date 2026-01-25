@@ -3,7 +3,8 @@
 h1 {
   font-weight: 700;
   line-height: 1.1;
-  font-size: clamp(u.rem(28), u.rem(16) + 2vw, u.rem(50));
+  font-size: clamp(u.rem(28), u.rem(28) + 2vw, u.rem(50));
+  font-family: u.$logoFont;
 }
 
 p {

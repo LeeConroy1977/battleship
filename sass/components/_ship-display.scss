@@ -1,0 +1,23 @@
+@use "../utils/" as u;
+@use "../globals/" as g;
+
+.ships__container--user,
+.ships__container--computer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgb(25, 25, 26);
+  border-radius: u.rem(12);
+  box-shadow: g.$inner-shadow;
+}
+
+.ship-image {
+  width: 19%;
+  //   height: 30px;
+}
+
+.visability {
+  visibility: hidden;
+}
