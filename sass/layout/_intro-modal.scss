@@ -151,6 +151,18 @@ img {
     font-weight: 600;
   }
 
+  .btn-container {
+    width: 60%;
+    height: 86%;
+    background-color: rgb(25, 25, 26);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: u.rem(12);
+    padding: u.rem(24) 0;
+  }
+
   &__btn--one {
     background-color: #306b34;
   }

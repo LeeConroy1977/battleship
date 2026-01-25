@@ -267,6 +267,17 @@ img {
   font-size: 1.5rem;
   font-weight: 600;
 }
+.start-right .btn-container {
+  width: 60%;
+  height: 86%;
+  background-color: rgb(25, 25, 26);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 0.75rem;
+  padding: 1.5rem 0;
+}
 .start-right__btn--one {
   background-color: #306b34;
 }
