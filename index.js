@@ -61,6 +61,7 @@ const resetGame = () => {
   userWon = false;
   computerWon = false;
   firstComputerHit = false;
+  removeShipDisplayClass();
 };
 
 const restartGame = () => {
@@ -70,7 +71,9 @@ const restartGame = () => {
   game.classList.add("hidden");
   body.classList.add("body");
   winnerPopUp.classList.add("hidden");
+  sh.classList.add("hidden");
   resetTargetShip();
+  removeShipDisplayClass();
   resetGame();
 };
 
@@ -111,9 +114,19 @@ const handleShipDisplay = (player, shipType) => {
   document.querySelector(`.${shipType}__${player}`).classList.add("visability");
 };
 
+const removeShipDisplayClass = () => {
+  document.querySelectorAll(".ship-image").forEach((image) => {
+    image.classList.remove("visability");
+  });
+};
+
 const userHitEffect = (element) => {
   const originalBg =
-    element === body ? "hsl(150, 15%, 13%)" : "rgb(25, 25, 26)";
+    element === body
+      ? "hsl(150, 15%, 13%)"
+      : element === imageContainer
+        ? "#19191a"
+        : "rgb(48, 107, 52)";
   setTimeout(() => {
     element.style.backgroundColor = "red";
   }, 150);
@@ -126,7 +139,13 @@ const userHitEffect = (element) => {
   setTimeout(() => {
     element.style.backgroundColor = "orange";
   }, 600);
-  setTimeout(() => (element.style.backgroundColor = originalBg), 750);
+  setTimeout(() => {
+    element.style.backgroundColor = "red";
+  }, 750);
+  setTimeout(() => {
+    element.style.backgroundColor = "orange";
+  }, 900);
+  setTimeout(() => (element.style.backgroundColor = originalBg), 1050);
 };
 
 document.querySelectorAll(".start-right__btn").forEach((btn) => {

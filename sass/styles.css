@@ -1,6 +1,6 @@
 :root {
-  --bg: hsl(150, 15%, 13%);
-  --text-colour: hsl(0, 0%, 100%);
+  --bg: #222222;
+  --text-colour: #fbfff1;
 }
 
 html {
@@ -19,14 +19,14 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
-  background-color: hsl(150, 15%, 13%);
-  color: hsl(0, 0%, 100%);
+  background-color: #222222;
+  color: #fbfff1;
   display: flex;
   justify-content: center;
   align-items: stretch;
   height: 100vh;
   width: 100vw;
-  background-color: hsl(150, 15%, 13%);
+  background-color: #222222;
 }
 
 h1 {
@@ -107,6 +107,7 @@ p {
   margin-left: auto;
   margin-right: auto;
   grid-column: 3/4;
+  color: #fbfff1;
 }
 
 @keyframes blinker {
@@ -135,7 +136,7 @@ p {
   margin: auto;
   width: 70%;
   height: 90%;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.8);
   border: 6px solid darkgrey;
   z-index: 1000;
   display: flex;
@@ -179,8 +180,10 @@ p {
   color: rgb(37, 36, 36);
 }
 
-p {
+p,
+li {
   font-size: 1.125rem;
+  color: rgb(37, 36, 36);
 }
 
 .instructions-left {
@@ -191,7 +194,7 @@ p {
   padding: 1rem 5rem;
   border-radius: 0.75rem;
   font-size: 1.375rem;
-  background-color: red;
+  background-color: green;
   color: white;
   font-family: "Bebas Neue", sans-serif;
   margin-left: auto;
@@ -204,7 +207,7 @@ p {
 }
 
 .hidden {
-  visibility: hidden;
+  display: none;
 }
 
 .show {
@@ -219,7 +222,7 @@ p {
   align-items: center;
 }
 
-.start_main {
+.start-main {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -232,7 +235,46 @@ p {
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  padding: 1.875rem;
+}
+
+img {
+  width: 50%;
+  height: 50%;
+  margin-bottom: 3.125rem;
+  margin-top: 0;
+}
+
+.signature {
+  margin-top: 2.5rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.start-right {
+  align-items: center;
+  gap: 4.375rem;
+  padding-top: 7.5rem;
+  font-family: "Bebas Neue", sans-serif;
+}
+.start-right__btn {
+  width: 300px;
+  height: 70px;
+  cursor: pointer;
+  border-radius: 0.75rem;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.start-right__btn--one {
+  background-color: green;
+}
+.start-right__btn--two {
+  background-color: orange;
+}
+.start-right__btn--three {
+  background-color: red;
 }
 
 .sunk-ship-pop-up {
@@ -376,7 +418,7 @@ p {
   position: relative;
   width: 240px;
   height: 240px;
-  border: 4px solid green;
+  border: 4px solid #306b34;
   border-radius: 50%;
   background-color: rgba(2, 58, 2, 0.5);
   overflow: hidden;
@@ -385,7 +427,7 @@ p {
   position: absolute;
   width: 6px;
   height: 50%;
-  background: linear-gradient(to bottom, rgba(0, 255, 0, 0.1) 0%, rgba(0, 255, 0, 0.9) 70%, rgb(0, 255, 0) 100%);
+  background: linear-gradient(to bottom, rgba(0, 255, 0, 0.1) 0%, rgba(0, 255, 0, 0.9) 70%, rgb(73, 132, 103) 100%);
   top: 50%;
   left: 50%;
   transform-origin: bottom center;
@@ -421,7 +463,7 @@ p {
   content: "";
   position: absolute;
   inset: -20px -10px -40px -10px;
-  background: radial-gradient(ellipse at bottom center, rgba(0, 255, 0, 0.35) 0%, transparent 70%);
+  background: radial-gradient(ellipse at bottom center, rgba(73, 132, 103, 0.35) 0% transparent 70%);
   pointer-events: none;
 }
 .radar .radar__blip {
@@ -748,16 +790,18 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: rgb(25, 25, 26);
+  align-items: center;
+  background-color: #306b34;
   border-radius: 0.75rem;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 0 0 2px rgba(0, 0, 0, 0.65), inset 0 -3px 5px rgba(0, 0, 0, 0.75);
 }
 
 .ship-image {
   width: 19%;
+  margin: 0;
 }
 
-.hidden {
+.visability {
   visibility: hidden;
 }
 

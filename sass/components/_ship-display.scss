@@ -8,14 +8,15 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: rgb(25, 25, 26);
+  align-items: center;
+  background-color: #306b34;
   border-radius: u.rem(12);
   box-shadow: g.$inner-shadow;
 }
 
 .ship-image {
   width: 19%;
-  //   height: 30px;
+  margin: 0;
 }
 
 .visability {

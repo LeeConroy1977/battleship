@@ -44,7 +44,7 @@
     position: relative;
     width: 240px;
     height: 240px;
-    border: 4px solid green;
+    border: 4px solid #306b34;
     border-radius: 50%;
     background-color: rgb(2, 58, 2, 0.5);
     overflow: hidden;
@@ -58,7 +58,7 @@
       to bottom,
       rgba(0, 255, 0, 0.1) 0%,
       rgba(0, 255, 0, 0.9) 70%,
-      rgba(0, 255, 0, 1) 100%
+      rgba(73, 132, 103, 1) 100%
     );
     top: 50%;
     left: 50%;
@@ -98,8 +98,7 @@
     inset: -20px -10px -40px -10px;
     background: radial-gradient(
       ellipse at bottom center,
-      rgba(0, 255, 0, 0.35) 0%,
-      transparent 70%
+      rgba(73, 132, 103, 0.35) 0% transparent 70%
     );
     pointer-events: none;
   }
