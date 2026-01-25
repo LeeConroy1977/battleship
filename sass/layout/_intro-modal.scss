@@ -67,6 +67,10 @@ p,
 li {
   font-size: u.rem(18);
   color: rgb(37, 36, 36);
+  font-family: u.$logoFont;
+  line-height: u.rem(22);
+  letter-spacing: u.rem(1.1);
+  margin-top: u.rem(4);
 }
 
 .instructions-left {
@@ -83,6 +87,7 @@ li {
     margin-left: auto;
     margin-top: auto;
     cursor: pointer;
+    letter-spacing: u.rem(1.2);
   }
 }
 
@@ -162,15 +167,21 @@ img {
     border-radius: u.rem(12);
     padding: u.rem(24) 0;
   }
+  &__btn--one,
+  &__btn--two,
+  &__btn--three {
+    font-family: u.$logoFont;
+    letter-spacing: u.rem(1.5);
+  }
 
   &__btn--one {
     background-color: #306b34;
   }
   &__btn--two {
-    background-color: #ffd25a;
+    background-color: #fe5f00;
   }
 
   &__btn--three {
-    background-color: #ba1200;
+    background-color: #e42c10;
   }
 }

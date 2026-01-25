@@ -57,12 +57,6 @@
   align-items: center;
   padding: u.rem(50);
 
-  &__statement {
-    font-size: u.rem(42);
-    padding: u.rem(40);
-    margin-top: u.rem(100);
-  }
-
   &__btn {
     margin-top: auto;
     margin-bottom: u.rem(120);
@@ -74,6 +68,13 @@
     font-weight: 600;
     cursor: pointer;
   }
+}
+.winner-pop-up__statement {
+  font-size: u.rem(42);
+  padding: u.rem(40);
+  margin-top: u.rem(100);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: normal;
 }
 
 .hidden {

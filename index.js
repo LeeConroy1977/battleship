@@ -10,6 +10,7 @@ import {
   sWin,
   dWin,
 } from "./utils/data/sunkShipStatements.js";
+import { computerWins, userWins } from "./utils/data/winnerStatement.js";
 
 const computerGrid = document.querySelector(".computer__grid");
 const userGrid = document.querySelector(".user__grid");
@@ -28,6 +29,7 @@ const shipDisplayComp = document.querySelector(".ships__container--computer");
 const shipDisplayUser = document.querySelector(".ships__container--user");
 const imageContainer = document.querySelector(".image-container__image");
 const sunkStatement = document.querySelector(".right-section__statement");
+const winnerStatement = document.querySelector(".winner-pop-up__statement");
 let userGo = true;
 let userWon = false;
 let computerWon = false;
@@ -48,6 +50,7 @@ let userArr;
 let computerStrikesGrid;
 let userSrikesGrid;
 let sunkShipsStatement = "";
+let sunkPauseActive = false;
 const computerSunkenShips = [];
 const userSunkenShips = [];
 const computerShips = { a: [], b: [], c: [], s: [], d: [] };
@@ -105,10 +108,6 @@ selfDestruct.addEventListener("click", () => {
   }, 1500);
 });
 
-sunkShipModalBtn.addEventListener("click", () => {
-  sunkShipModal.classList.add("hidden");
-});
-
 const handleSunkShipStatement = (shipType, status) => {
   let statementsArray = [];
   if (status === "Sunk") {
@@ -148,6 +147,14 @@ const handleGameWinner = (player) => {
     }
     title.textContent = `${player} Won the battle!`;
     userGo = false;
+    if (player === "user") {
+      winnerStatement.textContent =
+        userWins[Math.floor(Math.random() * userWins.length)];
+    }
+    if (player === "computer") {
+      winnerStatement.textContent =
+        computerWins[Math.floor(Math.random() * computerWins.length)];
+    }
   }, 1500);
 };
 
@@ -415,15 +422,27 @@ const handleUserSunkShip = () => {
       newlySunk = true;
 
       if (computerSunkenShips.length < Object.keys(shipSizes).length) {
-        sunkShipModal.classList.remove("hidden");
         handleShipDisplay("computer", shipType);
+        sunkPauseActive = true;
+        sunkShipModal.classList.remove("hidden");
+
+        setTimeout(() => {
+          sunkShipModal.classList.add("hidden");
+          sunkPauseActive = false;
+
+          if (!userWon) {
+            setTimeout(() => {
+              handleComputerSelection(computerStrikesGrid);
+            }, 500);
+          }
+        }, 5000);
       }
     }
   }
 
   if (computerSunkenShips.length === Object.keys(shipSizes).length) {
     userWon = true;
-    handleGameWinner("You");
+    handleGameWinner("user");
   }
 };
 
@@ -434,20 +453,25 @@ const handleComputerSunkShip = () => {
     const required = shipSizes[shipType];
 
     if (hits.length >= required && !userSunkenShips.includes(shipType)) {
+      sunkPauseActive = true;
       userSunkenShips.push(shipType);
       handleSunkShipStatement(shipType, "Win");
       newlySunk = true;
 
       if (userSunkenShips.length < Object.keys(shipSizes).length) {
-        sunkShipModal.classList.remove("hidden");
         handleShipDisplay("user", shipType);
+        sunkShipModal.classList.remove("hidden");
+        setTimeout(() => {
+          sunkShipModal.classList.add("hidden");
+          sunkPauseActive = false;
+        }, 5000);
       }
     }
   }
 
   if (userSunkenShips.length === Object.keys(shipSizes).length) {
     computerWon = true;
-    handleGameWinner("Computer");
+    handleGameWinner("computer");
   }
 };
 
@@ -646,7 +670,7 @@ const huntShipAfterHit = () => {
 };
 
 const handleComputerSelection = (arr) => {
-  if (userGo || computerTurnLocked) return;
+  if (sunkPauseActive || userGo || computerTurnLocked) return;
   computerTurnLocked = true;
   let shotFired = false;
 
@@ -686,7 +710,7 @@ const handleComputerSelection = (arr) => {
   }
 
   userGo = true;
-  setTimeout(handleComputerSunkShip, 2500);
+  setTimeout(handleComputerSunkShip, 500);
   computerTurnLocked = false;
 };
 
@@ -709,7 +733,7 @@ const handleUserSelection = (arr, cell, row, position, shipType) => {
   }
   setTimeout(() => {
     handleUserSunkShip();
-  }, 2500);
+  }, 500);
   userGo = !userGo;
   setTimeout(() => {
     handleComputerSelection(computerStrikesGrid);
@@ -717,6 +741,7 @@ const handleUserSelection = (arr, cell, row, position, shipType) => {
 };
 
 computerGrid.addEventListener("click", (e) => {
+  if (sunkPauseActive) return;
   const cell = e.target.closest(".grid__cell--computer");
   if (!cell) return;
   const row = Number(cell.dataset.row);

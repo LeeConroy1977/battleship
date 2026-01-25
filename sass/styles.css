@@ -184,6 +184,10 @@ p,
 li {
   font-size: 1.125rem;
   color: rgb(37, 36, 36);
+  font-family: "Bebas Neue", sans-serif;
+  line-height: 1.375rem;
+  letter-spacing: 0.06875rem;
+  margin-top: 0.25rem;
 }
 
 .instructions-left {
@@ -200,6 +204,7 @@ li {
   margin-left: auto;
   margin-top: auto;
   cursor: pointer;
+  letter-spacing: 0.075rem;
 }
 
 .briefing__intro {
@@ -278,14 +283,18 @@ img {
   border-radius: 0.75rem;
   padding: 1.5rem 0;
 }
+.start-right__btn--one, .start-right__btn--two, .start-right__btn--three {
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.09375rem;
+}
 .start-right__btn--one {
   background-color: #306b34;
 }
 .start-right__btn--two {
-  background-color: #ffd25a;
+  background-color: #fe5f00;
 }
 .start-right__btn--three {
-  background-color: #ba1200;
+  background-color: #e42c10;
 }
 
 .sunk-ship-pop-up {
@@ -346,6 +355,8 @@ img {
   font-size: 2.625rem;
   padding: 2.5rem;
   margin-top: 6.25rem;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: normal;
 }
 .right-section__btn {
   margin-top: auto;
@@ -416,11 +427,6 @@ img {
   align-items: center;
   padding: 3.125rem;
 }
-.right-section__statement {
-  font-size: 2.625rem;
-  padding: 2.5rem;
-  margin-top: 6.25rem;
-}
 .right-section__btn {
   margin-top: auto;
   margin-bottom: 7.5rem;
@@ -431,6 +437,14 @@ img {
   color: #fbfff1;
   font-weight: 600;
   cursor: pointer;
+}
+
+.winner-pop-up__statement {
+  font-size: 2.625rem;
+  padding: 2.5rem;
+  margin-top: 6.25rem;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: normal;
 }
 
 .hidden {
