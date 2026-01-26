@@ -128,7 +128,7 @@ p {
     opacity: 0;
   }
 }
-.body {
+body .body {
   background-image: url("../../assets/images/navy-fleet.jpg");
 }
 
