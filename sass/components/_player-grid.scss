@@ -15,6 +15,11 @@
   gap: 3px;
   aspect-ratio: 1;
   overflow: hidden;
+
+  // @media (max-width: #{u.em(1601)}) {
+  //   height: 90%;
+  //   width: 100%;
+  // }
 }
 
 .user__grid--nine,
@@ -38,6 +43,10 @@
   color: white;
   position: relative;
 
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    border: 2px solid #0b1833;
+  }
+
   &--user {
     background-color: #0f50db;
   }
@@ -49,10 +58,37 @@
 
 .cell__content {
   position: absolute;
-  width: 26px;
-  height: 26px;
+
   border-radius: 50%;
   background-color: #292929;
+
+  &--nine {
+    width: 25px;
+    height: 25px;
+
+    @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+      width: 18px;
+      height: 18px;
+    }
+  }
+  &--ten {
+    width: 23px;
+    height: 23px;
+
+    @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  &--eleven {
+    width: 21px;
+    height: 21px;
+
+    @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+      width: 14px;
+      height: 14px;
+    }
+  }
 }
 
 .grid__cell {

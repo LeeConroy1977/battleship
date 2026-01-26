@@ -10,6 +10,16 @@
   gap: u.rem(20);
   grid-template-columns: 4fr 4fr 2fr;
   grid-template-rows: 1fr 4fr 1fr;
+  margin: 0 auto;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 88vw;
+    height: 92vh;
+  }
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    height: 92vh;
+  }
 
   &__section {
     border-radius: u.rem(12);

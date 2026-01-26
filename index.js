@@ -57,7 +57,7 @@ let computerStrikesGrid;
 let userSrikesGrid;
 let sunkShipsStatement = "";
 let sunkPauseActive = false;
-let statement = "";
+
 const computerSunkenShips = [];
 const userSunkenShips = [];
 const computerShips = { a: [], b: [], c: [], s: [], d: [] };
@@ -82,7 +82,7 @@ const resetGame = () => {
   userWon = false;
   computerWon = false;
   firstComputerHit = false;
-  statement = "";
+  rimmerQuotes.textContent = "";
   removeShipDisplayClass();
 };
 
@@ -94,7 +94,7 @@ const restartGame = () => {
   body.classList.add("body");
   winnerPopUp.classList.add("hidden");
   sunkShipModal.classList.add("hidden");
-  statement = "";
+  rimmerQuotes.textContent = "";
   resetTargetShip();
   removeShipDisplayClass();
   resetGame();
@@ -141,6 +141,7 @@ winnerPopUpBtn.addEventListener("click", () => {
 });
 
 const handleRimmerQuotes = (type) => {
+  let statement = "";
   rimmerQuotes.classList.remove("is-typing");
   if (type === "computerHit") {
     const randomNum = Math.floor(Math.random() * rimmerHits.length);
@@ -304,6 +305,7 @@ const populateUserGrid = () => {
       const userDiv = document.createElement("div");
       UserCell.classList.add("grid__cell", "grid__cell--user");
       userDiv.classList.add("cell__content");
+      userDiv.classList.add(`cell__content--${gridArraySizeCss}`);
       userGrid.appendChild(UserCell);
       UserCell.appendChild(userDiv);
     }
@@ -323,6 +325,7 @@ const populateCompGrid = () => {
       const compDiv = document.createElement("div");
       CompCell.classList.add("grid__cell", "grid__cell--computer");
       compDiv.classList.add("cell__content");
+      compDiv.classList.add(`cell__content--${gridArraySizeCss}`);
       computerGrid.appendChild(CompCell);
       CompCell.appendChild(compDiv);
     }

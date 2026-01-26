@@ -48,6 +48,16 @@
     border-radius: 50%;
     background-color: rgba(2, 58, 2, 0.5);
     overflow: hidden;
+
+    @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+      width: 210px;
+      height: 210px;
+    }
+
+    @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+      width: 160px;
+      height: 160px;
+    }
   }
 
   &__scanner {

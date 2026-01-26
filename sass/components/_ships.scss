@@ -36,48 +36,145 @@
 .s__vertical--nine,
 .d__vertical--nine {
   margin-left: 20px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    margin-left: 18px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    margin-left: 15px;
+  }
 }
 
 .a__horizontal--nine {
   width: 290px;
   height: 40px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 260px;
+    height: 35px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 200px;
+    height: 30px;
+  }
 }
 .b__horizontal--nine {
   width: 230px;
   height: 40px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 205px;
+    height: 35px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 155px;
+    height: 30px;
+  }
 }
 .c__horizontal--nine {
   width: 170px;
   height: 40px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 205px;
+    height: 35px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 115px;
+    height: 30px;
+  }
 }
 .s__horizontal--nine {
   width: 170px;
   height: 40px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 150px;
+    height: 35px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 115px;
+    height: 30px;
+  }
 }
 .d__horizontal--nine {
   width: 110px;
   height: 40px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 95px;
+    height: 35px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 75px;
+    height: 30px;
+  }
 }
 
 .a__vertical--nine {
   width: 290px;
   height: 40px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 260px;
+    height: 35px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 200px;
+    height: 30px;
+  }
 }
 .b__vertical--nine {
   width: 230px;
   height: 40px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 205px;
+    height: 35px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 155px;
+    height: 30px;
+  }
 }
 .c__vertical--nine {
   width: 170px;
   height: 40px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 205px;
+    height: 35px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 115px;
+    height: 30px;
+  }
 }
 .s__vertical--nine {
   width: 170px;
   height: 40px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 150px;
+    height: 35px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 115px;
+    height: 30px;
+  }
 }
 .d__vertical--nine {
   width: 110px;
   height: 40px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 95px;
+    height: 35px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 75px;
+    height: 30px;
+  }
 }
 
 .a__horizontal--ten,
@@ -99,34 +196,116 @@
 
 .a__horizontal--ten {
   width: 255px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 230px;
+    height: 34px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 175px;
+    height: 28px;
+  }
 }
 .b__horizontal--ten {
   width: 205px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 180px;
+    height: 34px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 140px;
+    height: 28px;
+  }
 }
 .c__horizontal--ten {
   width: 150px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 135px;
+    height: 34px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 105px;
+    height: 28px;
+  }
 }
 .s__horizontal--ten {
   width: 150px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 135px;
+    height: 34px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 105px;
+    height: 28px;
+  }
 }
 .d__horizontal--ten {
   width: 96px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 85px;
+    height: 34px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 70px;
+    height: 28px;
+  }
 }
 
 .a__vertical--ten {
   width: 255px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 230px;
+    height: 34px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 175px;
+    height: 28px;
+  }
 }
 .b__vertical--ten {
   width: 205px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 180px;
+    height: 34px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 140px;
+    height: 28px;
+  }
 }
 .c__vertical--ten {
   width: 150px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 135px;
+    height: 34px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 105px;
+    height: 28px;
+  }
 }
 .s__vertical--ten {
   width: 150px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 135px;
+    height: 34px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 105px;
+    height: 28px;
+  }
 }
 .d__vertical--ten {
   width: 96px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 85px;
+    height: 34px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 70px;
+    height: 28px;
+  }
 }
 
 .a__horizontal--eleven,
@@ -144,36 +323,124 @@
 .d__vertical--eleven {
   margin-left: 16px;
   height: 32px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    margin-left: 15px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    margin-left: 13px;
+  }
 }
 
 .a__horizontal--eleven {
   width: 232px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 210px;
+    height: 30px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 160px;
+    height: 26px;
+  }
 }
 .b__horizontal--eleven {
   width: 185px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 165px;
+    height: 30px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 130px;
+    height: 26px;
+  }
 }
 .c__horizontal--eleven {
   width: 135px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 165px;
+    height: 30px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 95px;
+    height: 26px;
+  }
 }
 .s__horizontal--eleven {
   width: 135px;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 165px;
+    height: 30px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 95px;
+    height: 26px;
+  }
 }
 .d__horizontal--eleven {
   width: 86px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 80px;
+    height: 30px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 60px;
+    height: 26px;
+  }
 }
 
 .a__vertical--eleven {
   width: 232px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 210px;
+    height: 30px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 160px;
+    height: 26px;
+  }
 }
 .b__vertical--eleven {
   width: 185px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 165px;
+    height: 30px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 130px;
+    height: 26px;
+  }
 }
 .c__vertical--eleven {
   width: 135px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 165px;
+    height: 30px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 95px;
+    height: 26px;
+  }
 }
 .s__vertical--eleven {
   width: 135px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 165px;
+    height: 30px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 95px;
+    height: 26px;
+  }
 }
 .d__vertical--eleven {
   width: 86px;
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 80px;
+    height: 30px;
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    width: 60px;
+    height: 26px;
+  }
 }
