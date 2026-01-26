@@ -57,7 +57,8 @@ let computerStrikesGrid;
 let userSrikesGrid;
 let sunkShipsStatement = "";
 let sunkPauseActive = false;
-document.body.classList.add("body");
+document.body.style.backgroundImage =
+  'url("../../assets/images/navy-fleet.jpg")';
 
 const computerSunkenShips = [];
 const userSunkenShips = [];
@@ -85,6 +86,8 @@ const resetGame = () => {
   firstComputerHit = false;
   rimmerQuotes.textContent = "";
   removeShipDisplayClass();
+  document.body.style.backgroundImage =
+    'url("../../assets/images/navy-fleet.jpg")';
 };
 
 const restartGame = () => {
@@ -96,6 +99,8 @@ const restartGame = () => {
   winnerPopUp.classList.add("hidden");
   sunkShipModal.classList.add("hidden");
   rimmerQuotes.textContent = "";
+  document.body.style.backgroundImage =
+    'url("../../assets/images/navy-fleet.jpg")';
   resetTargetShip();
   removeShipDisplayClass();
   resetGame();
