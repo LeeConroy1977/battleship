@@ -28,6 +28,11 @@
   border-radius: 12px;
   padding: u.rem(25);
 
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    width: 80%;
+    height: 90%;
+  }
+
   &__title {
     color: rgb(44, 44, 44);
     padding: 0;
@@ -65,6 +70,11 @@
 
 h2 {
   margin: u.rem(30) 0;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    font-size: u.rem(20);
+    margin: u.rem(15) 0;
+  }
 }
 
 ul {
@@ -78,6 +88,10 @@ li {
   font-family: u.$logoFont;
   line-height: u.rem(22);
   letter-spacing: u.rem(1.1);
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    font-size: u.rem(15);
+  }
 }
 
 p {
@@ -103,6 +117,11 @@ li {
     margin-top: auto;
     cursor: pointer;
     letter-spacing: u.rem(1.2);
+
+    @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+      font-size: u.rem(18);
+      padding: u.rem(16) u.rem(70);
+    }
   }
 }
 
@@ -140,6 +159,7 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   padding: u.rem(30);
 }
 
@@ -158,8 +178,17 @@ img {
 .start-right {
   align-items: center;
   gap: u.rem(70);
-  padding-top: u.rem(120);
+  padding-top: u.rem(80);
   font-family: u.$logoFont;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    margin-top: u.rem(60);
+    padding-top: u.rem(0);
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    margin-top: u.rem(50);
+    padding-top: u.rem(0);
+  }
 
   &__btn {
     width: 300px;
@@ -169,24 +198,39 @@ img {
     color: white;
     font-size: u.rem(24);
     font-weight: 600;
+
+    @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+      width: 260px;
+      height: 70px;
+    }
+    @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+      width: 240px;
+      height: 65px;
+    }
   }
 
   .btn-container {
-    width: 60%;
-    height: 86%;
     background-color: rgb(25, 25, 26);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     border-radius: u.rem(12);
-    padding: u.rem(24) 0;
+    padding: u.rem(60) u.rem(40);
+    gap: u.rem(50);
   }
   &__btn--one,
   &__btn--two,
   &__btn--three {
     font-family: u.$logoFont;
     letter-spacing: u.rem(1.5);
+
+    @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+      font-size: u.rem(20);
+    }
+    @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+      font-size: u.rem(18);
+    }
   }
 
   &__btn--one {

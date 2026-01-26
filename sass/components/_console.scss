@@ -22,6 +22,11 @@
     font-size: u.rem(18);
     font-family: u.$logoFont;
     letter-spacing: u.rem(1.5);
+
+    @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+      font-size: u.rem(14);
+      padding: u.rem(14) u.rem(20);
+    }
   }
 }
 

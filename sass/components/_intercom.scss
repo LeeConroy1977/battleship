@@ -57,6 +57,13 @@
   white-space: nowrap;
   overflow: hidden;
   width: 0;
+
+  @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
+    font-size: u.rem(20);
+  }
+  @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
+    font-size: u.rem(16);
+  }
 }
 
 .message-container__message.is-typing {

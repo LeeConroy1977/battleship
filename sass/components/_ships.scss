@@ -322,7 +322,6 @@
 .s__vertical--eleven,
 .d__vertical--eleven {
   margin-left: 16px;
-  height: 32px;
 
   @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
     margin-left: 15px;
@@ -340,7 +339,7 @@
   }
   @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
     width: 160px;
-    height: 26px;
+    height: 24px;
   }
 }
 .b__horizontal--eleven {
@@ -351,30 +350,30 @@
   }
   @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
     width: 130px;
-    height: 26px;
+    height: 24px;
   }
 }
 .c__horizontal--eleven {
   width: 135px;
   @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
-    width: 165px;
+    width: 125px;
     height: 30px;
   }
   @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
     width: 95px;
-    height: 26px;
+    height: 24px;
   }
 }
 .s__horizontal--eleven {
   width: 135px;
 
   @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
-    width: 165px;
+    width: 125px;
     height: 30px;
   }
   @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
     width: 95px;
-    height: 26px;
+    height: 24px;
   }
 }
 .d__horizontal--eleven {
@@ -385,7 +384,7 @@
   }
   @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
     width: 60px;
-    height: 26px;
+    height: 24px;
   }
 }
 
@@ -397,7 +396,7 @@
   }
   @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
     width: 160px;
-    height: 26px;
+    height: 24px;
   }
 }
 .b__vertical--eleven {
@@ -408,29 +407,29 @@
   }
   @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
     width: 130px;
-    height: 26px;
+    height: 24px;
   }
 }
 .c__vertical--eleven {
   width: 135px;
   @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
-    width: 165px;
+    width: 122px;
     height: 30px;
   }
   @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
     width: 95px;
-    height: 26px;
+    height: 24px;
   }
 }
 .s__vertical--eleven {
   width: 135px;
   @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
-    width: 165px;
+    width: 122px;
     height: 30px;
   }
   @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
     width: 95px;
-    height: 26px;
+    height: 24px;
   }
 }
 .d__vertical--eleven {
@@ -441,6 +440,6 @@
   }
   @media (max-width: #{map-get(u.$breakpoint-down, "laptop")}) {
     width: 60px;
-    height: 26px;
+    height: 24px;
   }
 }
