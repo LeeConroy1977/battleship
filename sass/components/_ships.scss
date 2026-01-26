@@ -322,6 +322,7 @@
 .s__vertical--eleven,
 .d__vertical--eleven {
   margin-left: 16px;
+  height: 32px;
 
   @media (max-width: #{map-get(u.$breakpoint-down, "desktop")}) {
     margin-left: 15px;

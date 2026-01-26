@@ -1304,6 +1304,7 @@ img {
 .s__vertical--eleven,
 .d__vertical--eleven {
   margin-left: 16px;
+  height: 32px;
 }
 @media (max-width: 100.06125em) {
   .a__vertical--eleven,
