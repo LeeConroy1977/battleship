@@ -25,6 +25,7 @@ body {
   height: 100vh;
   width: 100vw;
   background-color: #222222;
+  background-image: url("/assets/images/navy-fleet.jpg");
 }
 
 h1 {
