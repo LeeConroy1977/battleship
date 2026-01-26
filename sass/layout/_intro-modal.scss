@@ -63,6 +63,14 @@
   color: rgb(37, 36, 36);
 }
 
+h2 {
+  margin: u.rem(30) 0;
+}
+
+ul {
+  margin-top: u.rem(0);
+}
+
 p,
 li {
   font-size: u.rem(18);
@@ -70,7 +78,14 @@ li {
   font-family: u.$logoFont;
   line-height: u.rem(22);
   letter-spacing: u.rem(1.1);
-  margin-top: u.rem(4);
+}
+
+p {
+  margin-top: u.rem(12);
+}
+
+li {
+  margin-top: u.rem(0);
 }
 
 .instructions-left {

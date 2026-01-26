@@ -1,6 +1,7 @@
 @use "../utils/" as u;
 @use "../globals/" as g;
 
+
 .console {
   display: flex;
   flex-direction: column;
@@ -36,7 +37,6 @@
 .radar {
   height: 40%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-top-left-radius: u.rem(12);
@@ -48,7 +48,7 @@
     height: 240px;
     border: 4px solid #306b34;
     border-radius: 50%;
-    background-color: rgb(2, 58, 2, 0.5);
+    background-color: rgba(2, 58, 2, 0.5);
     overflow: hidden;
   }
 
@@ -56,110 +56,92 @@
     position: absolute;
     width: 6px;
     height: 50%;
+    top: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%);
     background: linear-gradient(
       to bottom,
       rgba(0, 255, 0, 0.1) 0%,
       rgba(0, 255, 0, 0.9) 70%,
       rgba(73, 132, 103, 1) 100%
     );
-    top: 50%;
-    left: 50%;
-    transform-origin: bottom center;
-    transform: translate(-50%, -100%);
-    animation: sweep 1.5s linear infinite;
-  }
-  .blip1 {
-    top: 30%;
-    left: 60%;
-    animation-delay: 0s;
-  }
-  .blip2 {
-    top: 70%;
-    left: 50%;
-    animation-delay: 0.5s;
-  }
-  .blip3 {
-    top: 40%;
-    left: 80%;
-    animation-delay: 1s;
-  }
-  .blip4 {
-    top: 50%;
-    left: 10%;
-    animation-delay: 1.5s;
-  }
-  .blip5 {
-    top: 10%;
-    left: 90%;
-    animation-delay: 2s;
+    animation: sweep linear infinite;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -20px -10px -40px -10px;
+      background: radial-gradient(
+        ellipse at bottom center,
+        rgba(73, 132, 103, 0.35) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
   }
 
-  .radar__scanner::before {
-    content: "";
+
+  &__blip {
     position: absolute;
-    inset: -20px -10px -40px -10px;
-    background: radial-gradient(
-      ellipse at bottom center,
-      rgba(73, 132, 103, 0.35) 0% transparent 70%
-    );
-    pointer-events: none;
-  }
-
-  .radar__blip {
     width: 6px;
     height: 6px;
     background-color: #0f0;
     border-radius: 50%;
-    position: absolute;
     opacity: 0;
-    animation: blip-fade 2.5s infinite;
+    animation: blip-fade infinite;
+  }
+
+
+  .blip1 {
+    top: 30%;
+    left: 60%;
+  }
+  .blip2 {
+    top: 70%;
+    left: 50%;
+  }
+  .blip3 {
+    top: 40%;
+    left: 80%;
+  }
+  .blip4 {
+    top: 50%;
+    left: 10%;
+  }
+  .blip5 {
+    top: 10%;
+    left: 90%;
   }
 }
-.controls {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 44%;
-  border-bottom-left-radius: u.rem(12);
-  border-bottom-right-radius: u.rem(12);
 
-  &__grid {
-    display: grid;
-    height: 80%;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    justify-content: center;
-    align-items: center;
-    gap: u.rem(16);
+
+.radar--top {
+  .radar__scanner {
+    animation-duration: 1.5s;
   }
 
-  &__display {
-    width: 130px;
-    height: 130px;
-    padding: u.rem(8);
-    background: g.$silver;
-    border-radius: 50%;
-    box-shadow: g.$inner-shadow;
+  .radar__blip {
+    animation-duration: 2.5s;
+  }
+}
+
+.radar--bottom {
+  .radar__scanner {
+    animation-duration: 4s;
   }
 
-  &__dial {
-    width: 100%;
-    height: 100%;
-    background-color: rgb(189, 189, 189);
-    border-radius: 50%;
-    box-shadow: g.$inner-shadow;
+  .radar__blip {
+    animation-duration: 4s;
   }
 }
 
 @keyframes sweep {
   from {
-    transform: translateX(-50%) translateY(-100%) rotate(0deg);
+    transform: translate(-50%, -100%) rotate(0deg);
   }
   to {
-    transform: translateX(-50%) translateY(-100%) rotate(360deg);
+    transform: translate(-50%, -100%) rotate(360deg);
   }
 }
 

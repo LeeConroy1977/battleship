@@ -180,6 +180,14 @@ p {
   color: rgb(37, 36, 36);
 }
 
+h2 {
+  margin: 1.875rem 0;
+}
+
+ul {
+  margin-top: 0rem;
+}
+
 p,
 li {
   font-size: 1.125rem;
@@ -187,7 +195,14 @@ li {
   font-family: "Bebas Neue", sans-serif;
   line-height: 1.375rem;
   letter-spacing: 0.06875rem;
-  margin-top: 0.25rem;
+}
+
+p {
+  margin-top: 0.75rem;
+}
+
+li {
+  margin-top: 0rem;
 }
 
 .instructions-left {
@@ -544,7 +559,6 @@ img {
 .radar {
   height: 40%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-top-left-radius: 0.75rem;
@@ -563,97 +577,70 @@ img {
   position: absolute;
   width: 6px;
   height: 50%;
-  background: linear-gradient(to bottom, rgba(0, 255, 0, 0.1) 0%, rgba(0, 255, 0, 0.9) 70%, rgb(73, 132, 103) 100%);
   top: 50%;
   left: 50%;
   transform-origin: bottom center;
   transform: translate(-50%, -100%);
-  animation: sweep 1.5s linear infinite;
+  background: linear-gradient(to bottom, rgba(0, 255, 0, 0.1) 0%, rgba(0, 255, 0, 0.9) 70%, rgb(73, 132, 103) 100%);
+  animation: sweep linear infinite;
 }
-.radar .blip1 {
-  top: 30%;
-  left: 60%;
-  animation-delay: 0s;
-}
-.radar .blip2 {
-  top: 70%;
-  left: 50%;
-  animation-delay: 0.5s;
-}
-.radar .blip3 {
-  top: 40%;
-  left: 80%;
-  animation-delay: 1s;
-}
-.radar .blip4 {
-  top: 50%;
-  left: 10%;
-  animation-delay: 1.5s;
-}
-.radar .blip5 {
-  top: 10%;
-  left: 90%;
-  animation-delay: 2s;
-}
-.radar .radar__scanner::before {
+.radar__scanner::before {
   content: "";
   position: absolute;
   inset: -20px -10px -40px -10px;
-  background: radial-gradient(ellipse at bottom center, rgba(73, 132, 103, 0.35) 0% transparent 70%);
+  background: radial-gradient(ellipse at bottom center, rgba(73, 132, 103, 0.35) 0%, transparent 70%);
   pointer-events: none;
 }
-.radar .radar__blip {
+.radar__blip {
+  position: absolute;
   width: 6px;
   height: 6px;
   background-color: #0f0;
   border-radius: 50%;
-  position: absolute;
   opacity: 0;
-  animation: blip-fade 2.5s infinite;
+  animation: blip-fade infinite;
+}
+.radar .blip1 {
+  top: 30%;
+  left: 60%;
+}
+.radar .blip2 {
+  top: 70%;
+  left: 50%;
+}
+.radar .blip3 {
+  top: 40%;
+  left: 80%;
+}
+.radar .blip4 {
+  top: 50%;
+  left: 10%;
+}
+.radar .blip5 {
+  top: 10%;
+  left: 90%;
 }
 
-.controls {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 44%;
-  border-bottom-left-radius: 0.75rem;
-  border-bottom-right-radius: 0.75rem;
+.radar--top .radar__scanner {
+  animation-duration: 1.5s;
 }
-.controls__grid {
-  display: grid;
-  height: 80%;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+.radar--top .radar__blip {
+  animation-duration: 2.5s;
 }
-.controls__display {
-  width: 130px;
-  height: 130px;
-  padding: 0.5rem;
-  background: linear-gradient(180deg, #c8c8c8 0%, #b3b3b3 10%, #dedede 22%, #9c9c9c 36%, #c2c2c2 50%, #8a8a8a 65%, #b0b0b0 80%, #9a9a9a 92%, #cccccc 100%);
-  border-radius: 50%;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 0 0 2px rgba(0, 0, 0, 0.65), inset 0 -3px 5px rgba(0, 0, 0, 0.75);
+
+.radar--bottom .radar__scanner {
+  animation-duration: 4s;
 }
-.controls__dial {
-  width: 100%;
-  height: 100%;
-  background-color: rgb(189, 189, 189);
-  border-radius: 50%;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 0 0 2px rgba(0, 0, 0, 0.65), inset 0 -3px 5px rgba(0, 0, 0, 0.75);
+.radar--bottom .radar__blip {
+  animation-duration: 4s;
 }
 
 @keyframes sweep {
   from {
-    transform: translateX(-50%) translateY(-100%) rotate(0deg);
+    transform: translate(-50%, -100%) rotate(0deg);
   }
   to {
-    transform: translateX(-50%) translateY(-100%) rotate(360deg);
+    transform: translate(-50%, -100%) rotate(360deg);
   }
 }
 @keyframes blip-fade {

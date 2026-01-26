@@ -22,7 +22,6 @@ const game = document.querySelector(".game");
 const body = document.querySelector(".body");
 const selfDestruct = document.querySelector(".console__btn");
 const sunkShipModal = document.querySelector(".sunk-ship-pop-up");
-const sunkShipModalBtn = document.querySelector(".right-section__btn");
 const winnerPopUp = document.querySelector(".winner-pop-up");
 const winnerPopUpBtn = document.querySelector(".right-section__btn");
 const shipDisplayComp = document.querySelector(".ships__container--computer");
@@ -69,10 +68,6 @@ const bgMusic = new Audio(
 bgMusic.loop = true;
 bgMusic.volume = 0.8;
 bgMusic.muted = false;
-
-window.addEventListener("load", () => {
-  bgMusic.play().catch(() => {});
-});
 
 const resetGame = () => {
   userGo = true;
@@ -254,7 +249,7 @@ document.querySelectorAll(".start-right__btn").forEach((btn) => {
     populateUserGrid();
     populateCompGrid();
     shipPlacement();
-
+    bgMusic.play();
     introPopUp.classList.add("hidden");
     game.classList.remove("hidden");
     body.classList.remove("body");
@@ -435,7 +430,7 @@ const handleUserSunkShip = () => {
               handleComputerSelection(computerStrikesGrid);
             }, 500);
           }
-        }, 5000);
+        }, 4000);
       }
     }
   }
@@ -464,7 +459,7 @@ const handleComputerSunkShip = () => {
         setTimeout(() => {
           sunkShipModal.classList.add("hidden");
           sunkPauseActive = false;
-        }, 5000);
+        }, 4000);
       }
     }
   }
@@ -479,7 +474,7 @@ const handleCellHitCss = (arr, cell, row, position) => {
   const contentDiv = cell.querySelector(".cell__content");
   arr[row][position] = "hit";
   contentDiv.style.backgroundColor = "red";
-  cell.style.backgroundColor = "green";
+  cell.style.backgroundColor = "#306b34";
   contentDiv.style.border = "3px solid black";
   contentDiv.style.zIndex = 50;
 };
