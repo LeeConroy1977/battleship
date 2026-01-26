@@ -11,6 +11,11 @@ import {
   dWin,
 } from "./utils/data/sunkShipStatements.js";
 import { computerWins, userWins } from "./utils/data/winnerStatement.js";
+import {
+  userHits,
+  rimmerMisses,
+  rimmerHits,
+} from "./utils/data/rimmerQuotes.js";
 
 const computerGrid = document.querySelector(".computer__grid");
 const userGrid = document.querySelector(".user__grid");
@@ -29,6 +34,8 @@ const shipDisplayUser = document.querySelector(".ships__container--user");
 const imageContainer = document.querySelector(".image-container__image");
 const sunkStatement = document.querySelector(".right-section__statement");
 const winnerStatement = document.querySelector(".winner-pop-up__statement");
+const rimmerQuotes = document.querySelector(".message-container__message");
+
 let userGo = true;
 let userWon = false;
 let computerWon = false;
@@ -50,6 +57,7 @@ let computerStrikesGrid;
 let userSrikesGrid;
 let sunkShipsStatement = "";
 let sunkPauseActive = false;
+let statement = "";
 const computerSunkenShips = [];
 const userSunkenShips = [];
 const computerShips = { a: [], b: [], c: [], s: [], d: [] };
@@ -74,6 +82,7 @@ const resetGame = () => {
   userWon = false;
   computerWon = false;
   firstComputerHit = false;
+  statement = "";
   removeShipDisplayClass();
 };
 
@@ -85,6 +94,7 @@ const restartGame = () => {
   body.classList.add("body");
   winnerPopUp.classList.add("hidden");
   sunkShipModal.classList.add("hidden");
+  statement = "";
   resetTargetShip();
   removeShipDisplayClass();
   resetGame();
@@ -124,6 +134,30 @@ const handleSunkShipStatement = (shipType, status) => {
   if (sunkStatement) {
     sunkStatement.textContent = `"${sunkShipsStatement}"`;
   }
+};
+
+winnerPopUpBtn.addEventListener("click", () => {
+  restartGame();
+});
+
+const handleRimmerQuotes = (type) => {
+  rimmerQuotes.classList.remove("is-typing");
+  if (type === "computerHit") {
+    const randomNum = Math.floor(Math.random() * rimmerHits.length);
+    statement = rimmerHits[randomNum];
+  }
+  if (type === "computerMiss") {
+    const randomNum = Math.floor(Math.random() * rimmerMisses.length);
+    statement = rimmerMisses[randomNum];
+  }
+  if (type === "userHit") {
+    const randomNum = Math.floor(Math.random() * userHits.length);
+    statement = userHits[randomNum];
+  }
+
+  rimmerQuotes.textContent = `${statement}`;
+  void rimmerQuotes.offsetWidth;
+  rimmerQuotes.classList.add("is-typing");
 };
 
 winnerPopUpBtn.addEventListener("click", () => {
@@ -430,7 +464,7 @@ const handleUserSunkShip = () => {
               handleComputerSelection(computerStrikesGrid);
             }, 500);
           }
-        }, 4000);
+        }, 3500);
       }
     }
   }
@@ -459,7 +493,7 @@ const handleComputerSunkShip = () => {
         setTimeout(() => {
           sunkShipModal.classList.add("hidden");
           sunkPauseActive = false;
-        }, 4000);
+        }, 3500);
       }
     }
   }
@@ -618,6 +652,7 @@ const huntShipAfterHit = () => {
 
       if (shipHere && shipSizes[shipHere]) {
         computerStrikesGrid[row][position] = "hit";
+        handleRimmerQuotes("computerHit");
         handleCellHitCss(computerStrikesGrid, cell, row, position);
         addShipStrikes(userShips, shipHere);
         userHitEffect(body);
@@ -642,6 +677,7 @@ const huntShipAfterHit = () => {
         }
       } else {
         computerStrikesGrid[row][position] = "miss";
+        handleRimmerQuotes("computerMiss");
         handleCellMissCss(computerStrikesGrid, cell, row, position);
         new Audio("./assets/sounds/launching-missile-313226.mp3").play();
 
@@ -681,6 +717,7 @@ const handleComputerSelection = (arr) => {
       const shipType = userArr[row][position];
 
       if (shipSizes[shipType]) {
+        handleRimmerQuotes("computerHit");
         handleCellHitCss(arr, cell, row, position);
         addShipStrikes(userShips, shipType);
         userHitEffect(body);
@@ -694,6 +731,7 @@ const handleComputerSelection = (arr) => {
         targetDirection = null;
         targetAxis = null;
       } else {
+        handleRimmerQuotes("computerMiss");
         handleCellMissCss(arr, cell, row, position);
         new Audio("./assets/sounds/launching-missile-313226.mp3").play();
       }
@@ -717,6 +755,7 @@ const handleUserSelection = (arr, cell, row, position, shipType) => {
   if (!userGo) return;
   if (arr[row][position] === "hit" || arr[row][position] === "miss") return;
   if (Object.keys(shipSizes).includes(shipType)) {
+    handleRimmerQuotes("userHit");
     handleCellHitCss(arr, cell, row, position);
     addShipStrikes(computerShips, shipType);
     userHitEffect(shipDisplayComp);

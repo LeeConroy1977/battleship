@@ -561,8 +561,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: 0.75rem;
-  border-top-right-radius: 0.75rem;
+  border-radius: 0.75rem;
 }
 .radar__circle {
   position: relative;
@@ -695,6 +694,27 @@ img {
   line-height: 2.5rem;
 }
 
+.message-container__message {
+  color: #479b4c;
+  font-size: 1.5rem;
+  letter-spacing: 0.125rem;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.message-container__message.is-typing {
+  animation: typing 2.5s steps(35, end) forwards;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100ch;
+  }
+}
 .ship__a,
 .ship__b,
 .ship__c,

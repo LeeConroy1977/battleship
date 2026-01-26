@@ -49,3 +49,25 @@
     line-height: u.rem(40);
   }
 }
+
+.message-container__message {
+  color: #479b4c;
+  font-size: u.rem(24);
+  letter-spacing: u.rem(2);
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.message-container__message.is-typing {
+  animation: typing 2.5s steps(35, end) forwards;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100ch;
+  }
+}

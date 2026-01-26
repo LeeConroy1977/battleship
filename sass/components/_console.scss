@@ -1,7 +1,6 @@
 @use "../utils/" as u;
 @use "../globals/" as g;
 
-
 .console {
   display: flex;
   flex-direction: column;
@@ -39,8 +38,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: u.rem(12);
-  border-top-right-radius: u.rem(12);
+  border-radius: u.rem(12);
 
   &__circle {
     position: relative;
@@ -81,7 +79,6 @@
     }
   }
 
-
   &__blip {
     position: absolute;
     width: 6px;
@@ -91,7 +88,6 @@
     opacity: 0;
     animation: blip-fade infinite;
   }
-
 
   .blip1 {
     top: 30%;
@@ -114,7 +110,6 @@
     left: 90%;
   }
 }
-
 
 .radar--top {
   .radar__scanner {
