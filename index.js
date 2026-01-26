@@ -57,6 +57,7 @@ let computerStrikesGrid;
 let userSrikesGrid;
 let sunkShipsStatement = "";
 let sunkPauseActive = false;
+document.body.classList.add("body");
 
 const computerSunkenShips = [];
 const userSunkenShips = [];
